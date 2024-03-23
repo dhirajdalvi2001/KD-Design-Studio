@@ -17,7 +17,7 @@ export default function TopNavbar({ theme, setTheme }) {
   const location = useLocation();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  // Testing Comment
   const menuItems = [
     { title: "Home", href: "/" },
     { title: "Products", href: "/products" },
@@ -37,6 +37,7 @@ export default function TopNavbar({ theme, setTheme }) {
       onMenuOpenChange={setIsMenuOpen}
       isMenuOpen={isMenuOpen}
       className=""
+      isBordered
     >
       <NavbarContent className="flex justify-between">
         <NavbarBrand>
