@@ -12,19 +12,14 @@ import {
 import Logo from "../../assets/logo.svg";
 import { useLocation, useNavigate } from "react-router-dom";
 import ThemeSwitch from "../Switch/ThemeSwitch";
+import { menuItems } from "../../utils/data";
+import Typography from "../Typography/Typography";
 
 export default function TopNavbar({ theme, setTheme }) {
   const location = useLocation();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-// Testing Comment
-  const menuItems = [
-    { title: "Home", href: "/" },
-    { title: "Products", href: "/products" },
-    { title: "Work", href: "/work" },
-    { title: "About", href: "/about" },
-    { title: "Contact", href: "/contact" },
-  ];
+
   const pathName = location.pathname;
 
   function navigateTo(href) {
@@ -36,9 +31,9 @@ export default function TopNavbar({ theme, setTheme }) {
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
       isMenuOpen={isMenuOpen}
-      className=""
+      className="bg-foreground-100 sticky top-0 w-full h-24"
     >
-      <NavbarContent className="flex justify-between">
+      <NavbarContent className="flex justify-between h-24">
         <NavbarBrand>
           <div
             onClick={() => navigateTo("/")}
@@ -59,22 +54,39 @@ export default function TopNavbar({ theme, setTheme }) {
           />
         </div>
       </NavbarContent>
-      <NavbarContent className="hidden md:flex gap-4" justify="center">
-        {menuItems.map((item, index) => (
-          <NavbarItem key={`${item}-${index}`}>
-            <div
-              className={classNames(
-                "w-full h-14 px-4 flex items-center cursor-pointer",
-                item.href === pathName ? "text-primary" : "text-foreground"
-              )}
-              onClick={() => navigateTo(item.href)}
-            >
-              {item.title}
-            </div>
-          </NavbarItem>
-        ))}
-        <ThemeSwitch theme={theme} setTheme={setTheme} />
-      </NavbarContent>
+      <div className="flex items-center">
+        <ThemeSwitch
+          theme={theme}
+          setTheme={setTheme}
+          className="hidden md:block"
+        />
+        <NavbarContent
+          className="hidden md:flex md:flex-col gap-0 max-w-fit"
+          justify="center"
+        >
+          {menuItems.map((item, index) => {
+            const activeItem = item.href === pathName;
+            if (item.href === "/") return null;
+            return (
+              <NavbarItem
+                key={`${item}-${index}`}
+                className="w-full text-right flex justify-end"
+              >
+                <Typography
+                  variant="subtitle"
+                  className={classNames(
+                    "w-fit px-4 flex items-center cursor-pointer transition-all hover:line-through",
+                    activeItem ? "text-primary-500" : "text-foreground"
+                  )}
+                  onClick={() => navigateTo(item.href)}
+                >
+                  {item.title}
+                </Typography>
+              </NavbarItem>
+            );
+          })}
+        </NavbarContent>
+      </div>
       <NavbarMenu className="lg:hidden">
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>

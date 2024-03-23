@@ -1,7 +1,7 @@
-import React from "react";
+import BodyLayout from "../../components/Layout/BodyLayout";
 
 const Home = () => {
-  return <div>Home</div>;
+  return <BodyLayout>Home</BodyLayout>;
 };
 
 export default Home;

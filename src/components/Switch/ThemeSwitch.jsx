@@ -1,10 +1,12 @@
 import { VisuallyHidden, useSwitch } from "@nextui-org/react";
 import { MoonIcon, SunIcon } from "../icons";
+import classNames from "classnames";
 
 const ThemeSwitch = (props) => {
   const {
     Component,
     slots,
+    className,
     isSelected,
     getBaseProps,
     getInputProps,
@@ -12,7 +14,7 @@ const ThemeSwitch = (props) => {
   } = useSwitch(props);
   const { theme, setTheme } = props;
   return (
-    <div className="flex flex-col gap-2">
+    <div className={classNames("flex flex-col gap-2", className)}>
       <Component {...getBaseProps()}>
         <VisuallyHidden>
           <input

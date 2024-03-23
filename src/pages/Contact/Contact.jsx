@@ -1,7 +1,7 @@
-import React from "react";
+import BodyLayout from "../../components/Layout/BodyLayout";
 
 const Contact = () => {
-  return <div>Contact</div>;
+  return <BodyLayout>Contact</BodyLayout>;
 };
 
 export default Contact;

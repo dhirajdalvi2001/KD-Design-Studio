@@ -1,9 +1,7 @@
-import React from 'react'
+import BodyLayout from "../../components/Layout/BodyLayout";
 
 const Work = () => {
-  return (
-    <div>Work</div>
-  )
-}
+  return <BodyLayout>Work</BodyLayout>;
+};
 
-export default Work
+export default Work;
