@@ -10,13 +10,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
     "@nextui-org/react": "^2.2.10",
+    "axios": "^1.6.8",
     "classnames": "^2.5.1",
     "framer-motion": "^11.0.20",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.51.1",
     "react-router-dom": "^6.22.3",
-    "react-smooth-corners": "^1.0.4"
+    "react-smooth-corners": "^1.0.4",
+    "react-toastify": "^10.0.5",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

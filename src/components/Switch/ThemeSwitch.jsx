@@ -14,7 +14,7 @@ const ThemeSwitch = (props) => {
   } = useSwitch(props);
   const { theme, setTheme } = props;
   return (
-    <div className={classNames("flex flex-col gap-2", className)}>
+    <div className={classNames("flex flex-col", className)}>
       <Component {...getBaseProps()}>
         <VisuallyHidden>
           <input

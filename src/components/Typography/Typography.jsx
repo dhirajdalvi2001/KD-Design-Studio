@@ -11,6 +11,8 @@ export default function Typography({ children, variant, className, onClick }) {
       return "text-[15px] font-bold text-foreground-700";
     } else if (variant === "title") {
       return "text-xl font-bold text-foreground-700";
+    } else if (variant === "error") {
+      return "h-0 text-xs text-red-500";
     }
   }
   function handleClick() {

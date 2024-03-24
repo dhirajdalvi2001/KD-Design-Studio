@@ -47,10 +47,11 @@ export default function TopNavbar({ theme, setTheme }) {
           </div>
         </NavbarBrand>
 
-        <div className="md:hidden flex gap-4 items-center">
+        <div className="md:hidden flex items-center">
           <ThemeSwitch theme={theme} setTheme={setTheme} />
           <NavbarMenuToggle
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            className="!w-10 !h-10"
           />
         </div>
       </NavbarContent>
