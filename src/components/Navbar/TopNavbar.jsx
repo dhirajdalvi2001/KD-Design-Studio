@@ -19,7 +19,6 @@ export default function TopNavbar({ theme, setTheme }) {
   const location = useLocation();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const pathName = location.pathname;
 
   function navigateTo(href) {
