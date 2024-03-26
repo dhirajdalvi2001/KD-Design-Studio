@@ -1,7 +1,7 @@
 export const menuItems = [
   { title: "Home", href: "/" },
   { title: "Products", href: "/products" },
-  { title: "Work", href: "/work" },
+  { title: "About", href: "/about" },
   { title: "Contact", href: "/contact" },
 ];
 
@@ -24,6 +24,63 @@ export const products = [
       "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711226103/ssbiy4ubq9vqtjnpbus4.jpg",
       "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711226103/qd37svlyw6kpucdxcdeu.jpg",
       "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711226103/dnpjs9rqhg6rgtxfp7lf.jpg",
+    ],
+    details: [
+      {
+        id: 1,
+        title: "Introduction",
+        caption: [
+          "The Simplyseat chair design aims to be simple yet functional approach to seating solutions. The concept prioritizes minimal joints and ease of assembly, allowing for efficient manufacturing and versatility in material choices.",
+        ],
+      },
+      {
+        id: 2,
+        title: "Concept Overview",
+        caption: [
+          "The core idea behind the Simplyseat chair is to reduce integrity and aesthetic appeal. By minimizing joints, the assembly accessible to both manufacturers and consumers alike. Additionally, the modular nature of the design allows for customization and designers to create unique variations of the chair to suit various preferences and environments.",
+        ],
+      },
+      {
+        id: 3,
+        title: "Key Features",
+        listItems: [
+          {
+            id: 31,
+            title: "Minimal Joints",
+            caption: [
+              "The chair design emphasizes simplicity in construction, utilizing as few joints as possible without compromising stability. This approach streamlines the assembly process and reduces the likelihood of structural weaknesses over time.",
+            ],
+          },
+          {
+            id: 32,
+            title: "Modular Design",
+            caption: [
+              "The chair is designed to be modular, enabling easy customization and adaptation to different settings. Each component can be easily interchanged, allowing for a variety of configurations and material combinations.",
+            ],
+          },
+          {
+            id: 33,
+            title: "Easy Assembly",
+            caption: [
+              "With minimal joints and a straightforward assembly process, the chair can be easily built by consumers without the need for specialized tools or expertise. Clear instructions and intuitive design ensure a hassle-free assembly experience.",
+            ],
+          },
+          {
+            id: 34,
+            title: "Material Versatility",
+            caption: [
+              "The modular nature of the design allows for the use of various materials, including wood, metal, plastic, and composite materials. This versatility enables designers to explore different textures, colors, and finishes to create unique chair variants.",
+            ],
+          },
+          {
+            id: 35,
+            title: "Sustainable Design",
+            caption: [
+              "The minimalist approach to design reduces material waste and energy consumption during manufacturing. Additionally, the modular design promotes longevity and repairability, contributing to a more sustainable product lifecycle.",
+            ],
+          },
+        ],
+      },
     ],
   },
 ];

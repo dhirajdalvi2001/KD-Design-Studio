@@ -3,9 +3,9 @@ import FallbackLoader from "./components/Loader/FallbackLoader";
 import RootLayout from "./components/Layout/RootLayout";
 import Products from "./pages/Products/Products";
 import Contact from "./pages/Contact/Contact";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import Home from "./pages/Home/Home";
-import Work from "./pages/Work/Work";
+import About from "./pages/About/About";
 import "./App.css";
 import SingleProduct from "./pages/Products/SingleProduct";
 
@@ -49,10 +49,10 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "/work",
+        path: "/about",
         element: (
           <Suspense fallback={<FallbackLoader />}>
-            <Work />
+            <About />
           </Suspense>
         ),
       },
@@ -69,7 +69,6 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const [count, setCount] = useState(0);
   return (
     <main>
       <RouterProvider router={router} />

@@ -7,17 +7,21 @@ const Products = () => {
   return (
     <BodyLayout>
       <div className="pt-10 mx-auto w-full h-full flex justify-center">
-        <div className="w-[80%]">
+        <div className="w-[90%] xl:w-[80%] grid grid-cols-2 xl:grid-cols-3">
           {products.map((product) => {
             return (
-              <ProductCard
+              <div
                 key={product.id}
-                id={product.id}
-                slug={product.slug}
-                name={product.name}
-                short={product.short}
-                imgUrl={product.imgUrls[0]}
-              />
+                className="flex justify-center items-center h-[350px]"
+              >
+                <ProductCard
+                  id={product.id}
+                  slug={product.slug}
+                  name={product.name}
+                  short={product.short}
+                  imgUrl={product.imgUrls[0]}
+                />
+              </div>
             );
           })}
         </div>
