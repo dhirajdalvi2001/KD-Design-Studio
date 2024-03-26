@@ -9,7 +9,7 @@ import {
   NavbarMenu,
   NavbarMenuItem,
 } from "@nextui-org/react";
-import Logo from "../../assets/logo.svg";
+import Logo from "../../assets/logo-without-text.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import ThemeSwitch from "../Switch/ThemeSwitch";
 import { menuItems } from "../../utils/data";
@@ -41,7 +41,7 @@ export default function TopNavbar({ theme, setTheme }) {
             <img
               src={Logo}
               alt="KD-design-studio"
-              className="w-[140px] -mt-5"
+              className="w-[100px]"
             />
           </div>
         </NavbarBrand>
