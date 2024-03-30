@@ -3,11 +3,11 @@ import FallbackLoader from "./components/Loader/FallbackLoader";
 import RootLayout from "./components/Layout/RootLayout";
 import Products from "./pages/Products/Products";
 import Contact from "./pages/Contact/Contact";
-import { Suspense, useState } from "react";
-import About from "./pages/About/About";
+import { Suspense } from "react";
 import Home from "./pages/Home/Home";
-import Work from "./pages/Work/Work";
+import About from "./pages/About/About";
 import "./App.css";
+import SingleProduct from "./pages/Products/SingleProduct";
 
 const router = createBrowserRouter([
   {
@@ -29,19 +29,24 @@ const router = createBrowserRouter([
       },
       {
         path: "/products",
-        element: (
-          <Suspense fallback={<FallbackLoader />}>
-            <Products />
-          </Suspense>
-        ),
-      },
-      {
-        path: "/work",
-        element: (
-          <Suspense fallback={<FallbackLoader />}>
-            <Work />
-          </Suspense>
-        ),
+        children: [
+          {
+            index: true,
+            element: (
+              <Suspense fallback={<FallbackLoader />}>
+                <Products />
+              </Suspense>
+            ),
+          },
+          {
+            path: ":slug",
+            element: (
+              <Suspense fallback={<FallbackLoader />}>
+                <SingleProduct />
+              </Suspense>
+            ),
+          },
+        ],
       },
       {
         path: "/about",
@@ -64,8 +69,6 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <main>
       <RouterProvider router={router} />
