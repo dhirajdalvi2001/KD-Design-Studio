@@ -19,8 +19,8 @@ export default function ProductCard({ id, name, short, slug, imgUrl }) {
         />
       </div>
       <Typography
-        variant="title"
-        className="absolute -bottom-8 md:-bottom-2 md:group-hover:-bottom-8 md:opacity-0 md:group-hover:opacity-100 md:delay-100 transition-all"
+        variant="subtitle"
+        className="absolute -bottom-8 md:-bottom-2 md:group-hover:-bottom-8 md:opacity-0 md:group-hover:opacity-100 md:delay-100 transition-all font-normal"
       >
         {name}
       </Typography>

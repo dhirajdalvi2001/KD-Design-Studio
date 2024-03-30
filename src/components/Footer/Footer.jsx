@@ -29,7 +29,7 @@ export default function Footer() {
       </div>
       <Typography
         variant="a"
-        className="cursor-pointer w-28 md:w-36 max-md:text-xs text-sm text-right"
+        className="cursor-pointer w-28 md:w-36 text-xs text-right font-normal"
         href="mailto:kunal@kd-studio.in"
       >
         kunal@kd-studio.in
