@@ -22,12 +22,11 @@ export const products = [
     thumbnail:
       "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711809326/KD%20Design%20Studio/Simpliseat/thumbnail.svg",
     imgUrls: [
-      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711226125/KD%20Design%20Studio/Simpliseat/izhldgoyrze98pr0xbad.jpg",
-      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711226116/KD%20Design%20Studio/Simpliseat/ifndbf4swacfrwx3zno7.jpg",
-      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711226110/KD%20Design%20Studio/Simpliseat/pvj2o2vxet5wnxcoan9d.jpg",
-      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711226107/KD%20Design%20Studio/Simpliseat/jsoe0hkaiduhezbztba0.jpg",
-      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711226103/KD%20Design%20Studio/Simpliseat/qd37svlyw6kpucdxcdeu.jpg",
-      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711226103/KD%20Design%20Studio/Simpliseat/ssbiy4ubq9vqtjnpbus4.jpg",
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833647/KD%20Design%20Studio/Simpliseat/jre0zjplazlvuxnimmei.jpg",
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833675/KD%20Design%20Studio/Simpliseat/uuxdrtsyczzynnqpdykb.jpg",
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833689/KD%20Design%20Studio/Simpliseat/i7ae3y0kofal1madlpzx.jpg",
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833683/KD%20Design%20Studio/Simpliseat/xnibtgqvbftj7hnhh9k8.jpg",
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833679/KD%20Design%20Studio/Simpliseat/bnnqh6e35anerxk22yzq.jpg",
     ],
     details: [
       {
