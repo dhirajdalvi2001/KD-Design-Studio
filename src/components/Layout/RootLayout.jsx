@@ -9,7 +9,8 @@ import Footer from "../Footer/Footer";
 const RootLayout = () => {
   const [theme, setTheme] = useState("light");
   const location = useLocation();
-  const showFooter = !location.pathname.startsWith("/products/");
+  const showFooter =
+    !location.pathname.startsWith("/products/") && location.pathname !== "/";
 
   return (
     <div className={classNames(theme, "min-h-screen")}>

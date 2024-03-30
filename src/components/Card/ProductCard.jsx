@@ -9,19 +9,22 @@ export default function ProductCard({ id, name, short, slug, imgUrl }) {
   return (
     <div
       onClick={handleNavigation}
-      className="w-[300px] h-[300px] hover:w-[320px] hover:h-[320px] flex justify-center items-center overflow-hidden relative transition-all"
+      className="flex flex-col justify-center items-center group transition relative"
     >
-      <img
-        src={imgUrl}
-        alt={name}
-        className="w-[300px] hover:w-[320px] transition-all"
-      />
-      <Typography variant="title" className="absolute bottom-10">
+      <div className="w-[280px] md:w-[320px] h-[280px] md:h-[320px] flex justify-center items-center cursor-pointer overflow-hidden relative transition-all z-10 bg-foreground-50">
+        <img
+          src={imgUrl}
+          alt={name}
+          className="w-[240px] md:w-[280px] md:group-hover:w-[300px] transition-all"
+        />
+      </div>
+      <Typography
+        variant="title"
+        className="absolute -bottom-8 md:-bottom-2 md:group-hover:-bottom-8 md:opacity-0 md:group-hover:opacity-100 md:delay-100 transition-all"
+      >
         {name}
       </Typography>
-      <Typography variant="caption" className="absolute bottom-3 w-[80%]">
-        {short}
-      </Typography>
+      {/* <Typography variant="caption">{short}</Typography> */}
     </div>
   );
 }

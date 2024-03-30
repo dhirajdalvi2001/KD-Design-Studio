@@ -34,16 +34,14 @@ const Contact = () => {
 
   const onSubmit = async (data) => {
     setLoading(true);
-    console.log(errors, data, "data DD");
     const result = await axios.post(import.meta.env.VITE_FORMSPREE_LINK, data);
-    console.log(result, "result DD");
     if (result.status === 200) {
       reset();
       toast.success("Message sent!");
     }
     setLoading(false);
   };
-  console.log(errors, "errors DD");
+
   return (
     <BodyLayout>
       <div className="mx-auto pb-20 w-[80%] flex flex-col lg:flex-row items-center gap-10">

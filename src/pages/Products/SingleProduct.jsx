@@ -21,11 +21,11 @@ export default function SingleProduct() {
   ];
   return (
     <BodyLayout>
-      <div className="w-full h-full flex flex-col md:flex-row gap-4">
-        <div className="pb-7 md:py-14 min-w-[50%] max-md:top-24 max-md:bg-white">
-          <div className="md:fixed md:top-[20vh] md:left-14 m-auto h-fit md:h-[70vh] w-[90%] px-2 md:px-4 md:w-[45vw] flex flex-col gap-4 md:overflow-y-scroll">
-            <div className="sticky top-24 pt-[28px] pb-4 md:top-0 bg-white md:bg-foreground-50">
-              <div className="">
+      <div className="w-full h-full flex flex-col md:flex-row max-md:gap-4">
+        <div className="pb-7 md:py-14 min-w-[55%] max-md:top-24 max-md:bg-white">
+          <div className="md:fixed md:top-36 md:left-8 lg:left-14 m-auto h-fit md:h-[70vh] w-[90%] px-2 md:px-0 md:w-[50vw] flex flex-col">
+            <div className="sticky top-16 max-md:pt-[12px] pb-4 md:top-0 bg-white md:bg-foreground-50">
+              <div className="mb-4">
                 <Breadcrumbs options={breadcrumbOptions} />
               </div>
               {/* Product Details */}
@@ -94,8 +94,8 @@ export default function SingleProduct() {
               <img
                 key={image}
                 src={image}
-                alt={slug + index}
-                className="w-4/5"
+                alt={slug + "_image_" + index}
+                className="w-[90%]"
               />
             );
           })}
