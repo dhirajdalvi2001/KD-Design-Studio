@@ -20,3 +20,7 @@
 li::marker {
   font-size: 12px;
 }
+
+html {
+  background-color: transparent !important;
+}

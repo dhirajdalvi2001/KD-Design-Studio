@@ -22,9 +22,9 @@ export default function SingleProduct() {
   return (
     <BodyLayout>
       <div className="w-full h-full flex flex-col md:flex-row max-md:gap-4">
-        <div className="pb-7 md:py-14 min-w-[55%] max-md:top-24 max-md:bg-white">
+        <div className="pb-7 md:py-14 min-w-[55%] max-md:top-24 ">
           <div className="md:fixed md:top-36 md:left-8 lg:left-14 m-auto h-fit md:h-[70vh] w-[90%] px-2 md:px-0 md:w-[50vw] flex flex-col">
-            <div className="sticky top-16 max-md:pt-[12px] pb-4 md:top-0 bg-white md:bg-foreground-50">
+            <div className="sticky top-16 max-md:pt-[12px] pb-4 md:top-0 bg-foreground-50 md:bg-foreground-50">
               <div className="mb-4">
                 <Breadcrumbs options={breadcrumbOptions} />
               </div>

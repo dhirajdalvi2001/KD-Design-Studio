@@ -100,7 +100,7 @@ export default function TopNavbar({ theme, setTheme }) {
               <NavbarMenuItem key={`${item}-${index}`}>
                 <div
                   className={classNames(
-                    "w-full",
+                    "w-full pl-2 text-base",
                     activeItem ? "text-red-600" : "text-foreground"
                   )}
                   onClick={() => navigateTo(item.href)}
