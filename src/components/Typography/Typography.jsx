@@ -16,9 +16,9 @@ export default function Typography({
     } else if (variant === "subtitle") {
       return "text-[15px] font-bold text-foreground-700";
     } else if (variant === "title") {
-      return "text-xl font-bold text-foreground-700";
+      return "text-base font-bold text-foreground-700";
     } else if (variant === "a") {
-      return "text-[15px] font-bold text-blue-500";
+      return "text-[15px] font-bold text-red-600";
     } else if (variant === "error") {
       return "h-0 text-xs text-red-500";
     }

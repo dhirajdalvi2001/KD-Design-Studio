@@ -30,78 +30,88 @@ export default function TopNavbar({ theme, setTheme }) {
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
       isMenuOpen={isMenuOpen}
-      className="bg-foreground-100 sticky top-0 w-full h-24"
+      maxWidth="full"
+      className="bg-foreground-100 fixed top-0 w-full h-16 md:h-24"
     >
-      <NavbarContent className="flex justify-between h-24">
-        <NavbarBrand>
-          <div
-            onClick={() => navigateTo("/")}
-            className="font-bold text-inherit h-14 overflow-hidden cursor-pointer"
-          >
-            <img
-              src={Logo}
-              alt="KD-design-studio"
-              className="w-[100px]"
+      <NavbarContent className="w-full">
+        <NavbarContent className="flex justify-between h-16 md:h-24">
+          <NavbarBrand>
+            <div
+              onClick={() => navigateTo("/")}
+              className="font-bold text-inherit h-14 overflow-hidden cursor-pointer flex items-center"
+            >
+              <img
+                src={Logo}
+                alt="KD-design-studio"
+                className="w-[80px] md:w-[100px]"
+              />
+            </div>
+          </NavbarBrand>
+
+          <div className="md:hidden flex items-center">
+            <ThemeSwitch theme={theme} setTheme={setTheme} />
+            <NavbarMenuToggle
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              className="!w-10 !h-10"
             />
           </div>
-        </NavbarBrand>
-
-        <div className="md:hidden flex items-center">
-          <ThemeSwitch theme={theme} setTheme={setTheme} />
-          <NavbarMenuToggle
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            className="!w-10 !h-10"
+        </NavbarContent>
+        <div className="hidden md:flex items-center">
+          <ThemeSwitch
+            theme={theme}
+            setTheme={setTheme}
+            className="hidden md:block"
           />
+          <NavbarContent
+            className="hidden md:flex md:flex-col gap-0 max-w-fit"
+            justify="center"
+          >
+            {menuItems.map((item, index) => {
+              const activeItem =
+                item.href === pathName || pathName.startsWith(item.href);
+              if (item.href === "/") return null;
+              return (
+                <NavbarItem
+                  key={`${item}-${index}`}
+                  className="w-full text-right flex justify-end "
+                >
+                  <Typography
+                    variant="subtitle"
+                    className={classNames(
+                      "w-fit px-4 flex items-center cursor-pointer transition-all hover:line-through !text-xs",
+                      activeItem ? "text-red-600" : "text-foreground"
+                    )}
+                    onClick={() => navigateTo(item.href)}
+                  >
+                    {item.title}
+                  </Typography>
+                </NavbarItem>
+              );
+            })}
+          </NavbarContent>
         </div>
-      </NavbarContent>
-      <div className="flex items-center">
-        <ThemeSwitch
-          theme={theme}
-          setTheme={setTheme}
-          className="hidden md:block"
-        />
-        <NavbarContent
-          className="hidden md:flex md:flex-col gap-0 max-w-fit"
-          justify="center"
-        >
+        <NavbarMenu className="lg:hidden">
           {menuItems.map((item, index) => {
-            const activeItem = item.href === pathName;
-            if (item.href === "/") return null;
+            const homeActive = pathName === "/" && item.title === "Home";
+            const products =
+              pathName.startsWith("/products/") && item.title === "Products";
+            const activeItem = item.href === pathName || homeActive || products;
             return (
-              <NavbarItem
-                key={`${item}-${index}`}
-                className="w-full text-right flex justify-end"
-              >
-                <Typography
-                  variant="subtitle"
+              <NavbarMenuItem key={`${item}-${index}`}>
+                <div
                   className={classNames(
-                    "w-fit px-4 flex items-center cursor-pointer transition-all hover:line-through",
-                    activeItem ? "text-primary-500" : "text-foreground"
+                    "w-full",
+                    activeItem ? "text-red-600" : "text-foreground"
                   )}
                   onClick={() => navigateTo(item.href)}
                 >
                   {item.title}
-                </Typography>
-              </NavbarItem>
+                </div>
+              </NavbarMenuItem>
             );
           })}
-        </NavbarContent>
-      </div>
-      <NavbarMenu className="lg:hidden">
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <div
-              className={classNames(
-                "w-full",
-                item.href === pathName ? "text-primary" : "text-foreground"
-              )}
-              onClick={() => navigateTo(item.href)}
-            >
-              {item.title}
-            </div>
-          </NavbarMenuItem>
-        ))}
-      </NavbarMenu>
+        </NavbarMenu>
+      </NavbarContent>
     </Navbar>
   );
 }
