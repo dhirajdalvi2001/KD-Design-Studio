@@ -41,14 +41,10 @@ const Home = () => {
               className="h-[90vh] !flex !justify-center !items-center"
             >
               <div
-                className="w-[90vw] h-[90vw] md:h-full md:w-fit flex justify-center items-center overflow-hidden cursor-pointer"
+                className="w-[90vw] h-[90vw] md:h-[40vw] md:w-[40vw] flex justify-center items-center overflow-hidden cursor-pointer"
                 onClick={() => navigate(`/products/${products[0].slug}`)}
               >
-                <img
-                  src={image}
-                  alt=""
-                  className="w-full md:h-full md:w-auto"
-                />
+                <img src={image} alt="" className="w-full" />
               </div>
               <Carousel.Caption className="text-foreground-800 p-0 sm:hidden -z-10">
                 <div className="flex justify-between">
