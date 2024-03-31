@@ -1,11 +1,11 @@
 import BodyLayout from "../../components/Layout/BodyLayout";
 import Typography from "../../components/Typography/Typography";
-import { socials } from "../../utils/data";
+import { aboutImg, socials } from "../../utils/data";
 
 const About = () => {
   return (
     <BodyLayout>
-      <div className="pt-6 md:pt-16 flex flex-col md:flex-row justify-center items-center gap-10 w-[90%] md:w-3/4 mx-auto">
+      <div className="py-6 md:py-16 flex flex-col md:flex-row justify-center items-center gap-10 w-[90%] md:w-3/4 mx-auto">
         <div className="w-full md:w-1/2 flex flex-col gap-4">
           <div className="flex flex-col gap-10">
             <div className="flex flex-col gap-4">
@@ -64,7 +64,13 @@ const About = () => {
             </div>
           </div>
         </div>
-        <div className="w-full md:w-1/2"></div>
+        <div className="w-full md:w-1/2 flex justify-center items-center">
+          <img
+            src={aboutImg}
+            alt="Kunal-Dalvi-KD-Design-Studio"
+            className="w-full lg:w-3/4"
+          />
+        </div>
       </div>
     </BodyLayout>
   );

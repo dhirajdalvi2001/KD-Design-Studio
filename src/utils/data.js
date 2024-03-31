@@ -3,6 +3,12 @@ export const socials = {
   instagram: "https://www.instagram.com/_kd_studio__/",
 };
 
+export const aboutImg =
+  "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711876001/KD%20Design%20Studio/About/about-image.jpg";
+
+export const contactImg =
+  "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711876986/KD%20Design%20Studio/Contact/contact-image.png";
+
 export const menuItems = [
   { title: "Home", href: "/" },
   { title: "Products", href: "/products" },

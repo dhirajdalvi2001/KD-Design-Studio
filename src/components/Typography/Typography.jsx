@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Typography({
   children,
@@ -8,6 +9,7 @@ export default function Typography({
   onClick,
   href,
 }) {
+  const navigate = useNavigate();
   function applyTextStyles() {
     if (variant === "caption") {
       return "text-xs text-foreground-600";
@@ -25,13 +27,14 @@ export default function Typography({
   }
   function handleClick() {
     onClick && onClick();
+    href && navigate(href);
   }
   return (
     <div
       className={classNames(applyTextStyles(), className)}
       onClick={handleClick}
     >
-      {href ? <a href={href}>{children}</a> : children}
+      {children}
     </div>
   );
 }

@@ -8,6 +8,7 @@ import Typography from "../../components/Typography/Typography";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import { contactImg } from "../../utils/data";
 
 const contactFormSchema = yup.object().shape({
   name: yup.string().required("Name is required").trim(),
@@ -46,9 +47,9 @@ const Contact = () => {
     <BodyLayout>
       <div className="mx-auto pb-20 w-[80%] flex flex-col lg:flex-row items-center gap-10">
         <img
-          src={ContactUs}
-          alt=""
-          className="w-full lg:w-[50vw] xl:w-[60vw]"
+          src={contactImg}
+          alt="KD-Design-Studio"
+          className="w-full lg:w-[50vw] xl:w-[40vw] md:p-20"
         />
         <form
           onSubmit={handleSubmit(onSubmit)}
