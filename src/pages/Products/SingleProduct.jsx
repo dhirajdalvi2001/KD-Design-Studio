@@ -58,7 +58,10 @@ export default function SingleProduct() {
                       <ol className="pl-4 list-decimal">
                         {detail?.listItems?.map((list, index) => {
                           return (
-                            <li key={"list" + index}>
+                            <li
+                              key={"list" + index}
+                              className="text-foreground-500"
+                            >
                               <Typography variant="caption">
                                 {list?.caption?.map((caption, index) => {
                                   return <p key={index}>{caption}</p>;
