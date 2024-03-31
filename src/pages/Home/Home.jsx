@@ -54,7 +54,7 @@ const Home = () => {
                   </Typography>
                   <Typography
                     variant="a"
-                    className="text-[11px]"
+                    className="text-[11px] font-normal"
                     href="/products"
                   >
                     View all
