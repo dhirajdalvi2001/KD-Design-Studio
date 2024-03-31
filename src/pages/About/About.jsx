@@ -11,11 +11,7 @@ const About = () => {
             <div className="flex flex-col gap-4">
               <Typography variant="subtitle">Contact</Typography>
               <div className="flex flex-col gap-1">
-                <Typography
-                  variant="caption"
-                  className="cursor-pointer w-fit"
-                  href="mailto:kunal@kd-studio.in"
-                >
+                <Typography variant="caption" className="cursor-pointer w-fit">
                   kunal@kd-studio.in
                 </Typography>
                 <div className="flex">

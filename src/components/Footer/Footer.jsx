@@ -30,7 +30,6 @@ export default function Footer() {
       <Typography
         variant="a"
         className="cursor-pointer w-32 md:w-36 !text-[11px] text-right font-normal"
-        href="mailto:kunal@kd-studio.in"
       >
         kunal@kd-studio.in
       </Typography>
