@@ -79,7 +79,9 @@ export default function TopNavbar({ theme, setTheme }) {
                     variant="subtitle"
                     className={classNames(
                       "w-fit px-4 flex items-center cursor-pointer transition-all hover:line-through !text-xs",
-                      activeItem ? "text-red-600" : "text-foreground"
+                      activeItem
+                        ? "text-red-600 line-through"
+                        : "text-foreground"
                     )}
                     onClick={() => navigateTo(item.href)}
                   >
@@ -101,7 +103,7 @@ export default function TopNavbar({ theme, setTheme }) {
                 <div
                   className={classNames(
                     "w-full pl-2 text-base",
-                    activeItem ? "text-red-600" : "text-foreground"
+                    activeItem ? "text-red-600 line-through" : "text-foreground"
                   )}
                   onClick={() => navigateTo(item.href)}
                 >

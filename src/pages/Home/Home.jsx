@@ -4,6 +4,7 @@ import { products } from "../../utils/data";
 import { useNavigate } from "react-router-dom";
 import Typography from "../../components/Typography/Typography";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ const Home = () => {
                 className="w-[90vw] h-[90vw] md:h-[40vw] md:w-[40vw] flex justify-center items-center overflow-hidden cursor-pointer"
                 onClick={() => navigate(`/products/${products[0].slug}`)}
               >
-                <img src={image} alt="" className="w-full" />
+                <LazyLoadImage src={image} alt="" className="w-full" />
               </div>
               <Carousel.Caption className="text-foreground-800 p-0 sm:hidden -z-10">
                 <div className="flex justify-between">
