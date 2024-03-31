@@ -16,7 +16,7 @@ export default function Breadcrumbs({ options }) {
     <NextUIBreadcrumbs
       onAction={(key) => setCurrentPage(key)}
       itemClasses={{
-        item: "text-foreground-500 hover:text-[#222] hover:underline data-[current=true]:text-[#222] data-[current=true]:font-semibold",
+        item: "text-foreground-500 hover:text-text-foregroun-900 hover:underline data-[current=true]:text-foreground-800 data-[current=true]:font-semibold",
         separator: "text-foreground-500",
       }}
     >

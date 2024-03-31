@@ -52,7 +52,7 @@ export default function TopNavbar({ theme, setTheme }) {
             <ThemeSwitch theme={theme} setTheme={setTheme} />
             <NavbarMenuToggle
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-              className="!w-10 !h-10"
+              className="!w-10 !h-10 !text-foreground-500"
             />
           </div>
         </NavbarContent>
