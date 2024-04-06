@@ -43,7 +43,7 @@ const Home = () => {
             >
               <div
                 className="w-[96vw] sm:w-[90vw] h-[90vw] md:h-[40vw] md:w-[40vw] flex justify-center items-center overflow-hidden cursor-pointer"
-                onClick={() => navigate(`/products/${products[0].slug}`)}
+                onClick={() => navigate(`/products/${product.slug}`)}
               >
                 <LazyLoadImage
                   src={product?.src}

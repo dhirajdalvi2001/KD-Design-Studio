@@ -32,8 +32,8 @@ export const carousalProducts = [
   {
     id: 3,
     name: "Simpliseat",
-    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833675/KD%20Design%20Studio/Simpliseat/uuxdrtsyczzynnqpdykb.jpg",
     slug: "simpliseat",
+    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833675/KD%20Design%20Studio/Simpliseat/uuxdrtsyczzynnqpdykb.jpg",
   },
   {
     id: 4,
@@ -44,8 +44,8 @@ export const carousalProducts = [
   {
     id: 5,
     name: "Simpliseat",
-    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833689/KD%20Design%20Studio/Simpliseat/i7ae3y0kofal1madlpzx.jpg",
     slug: "simpliseat",
+    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833689/KD%20Design%20Studio/Simpliseat/i7ae3y0kofal1madlpzx.jpg",
   },
   {
     id: 6,
