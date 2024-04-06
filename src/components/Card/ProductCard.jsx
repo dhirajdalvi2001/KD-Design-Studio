@@ -15,12 +15,12 @@ export default function ProductCard({ id, name, short, slug, imgUrl }) {
         <img
           src={imgUrl}
           alt={name}
-          className="w-[240px] md:w-[280px] md:group-hover:w-[300px] transition-all"
+          className="h-[240px] md:h-[280px] md:group-hover:h-[300px] transition-all"
         />
       </div>
       <Typography
         variant="subtitle"
-        className="absolute -bottom-8 md:-bottom-2 md:group-hover:-bottom-8 md:opacity-0 md:group-hover:opacity-100 md:delay-100 transition-all font-normal"
+        className="absolute -bottom-8 md:-bottom-2 md:group-hover:-bottom-8 md:opacity-0 md:group-hover:opacity-100 transition-all font-normal"
       >
         {name}
       </Typography>

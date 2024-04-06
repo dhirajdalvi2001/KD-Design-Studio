@@ -16,15 +16,51 @@ export const menuItems = [
   { title: "Contact", href: "/contact" },
 ];
 
+export const carousalProducts = [
+  {
+    id: 1,
+    name: "Simpliseat",
+    slug: "simpliseat",
+    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833647/KD%20Design%20Studio/Simpliseat/jre0zjplazlvuxnimmei.jpg",
+  },
+  {
+    id: 2,
+    name: "Bedside Memoir Side Table",
+    slug: "begside-momoir-side-table",
+    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712427002/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/f2rgrxa1vwyxgvuj58jz.jpg",
+  },
+  {
+    id: 3,
+    name: "Simpliseat",
+    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833675/KD%20Design%20Studio/Simpliseat/uuxdrtsyczzynnqpdykb.jpg",
+    slug: "simpliseat",
+  },
+  {
+    id: 4,
+    name: "Bedside Memoir Side Table",
+    slug: "begside-momoir-side-table",
+    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712426926/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/mfnflz2hv5nfrhxxyxiy.jpg",
+  },
+  {
+    id: 5,
+    name: "Simpliseat",
+    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833689/KD%20Design%20Studio/Simpliseat/i7ae3y0kofal1madlpzx.jpg",
+    slug: "simpliseat",
+  },
+  {
+    id: 6,
+    name: "Bedside Memoir Side Table",
+    slug: "begside-momoir-side-table",
+    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712427005/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/maswlravxq12ecwvltlp.jpg",
+  },
+];
+
 export const products = [
   {
     id: 1,
     slug: "simpliseat",
     name: "Simpliseat",
     year: 2024,
-    materials: ["wooden", "steel"],
-    short:
-      "Easy to assemble, versatile in materials, and perfect for any space.",
     thumbnail:
       "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711809326/KD%20Design%20Studio/Simpliseat/thumbnail.svg",
     imgUrls: [
@@ -88,6 +124,30 @@ export const products = [
               "The minimalist approach to design reduces material waste and energy consumption during manufacturing. Additionally, the modular design promotes longevity and repairability, contributing to a more sustainable product lifecycle.",
             ],
           },
+        ],
+      },
+    ],
+  },
+  {
+    id: 2,
+    slug: "begside-momoir-side-table",
+    name: "Bedside Memoir Side Table",
+    year: 2024,
+    thumbnail:
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712426405/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/thumbnail.svg",
+    imgUrls: [
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712427002/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/f2rgrxa1vwyxgvuj58jz.jpg",
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712426926/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/mfnflz2hv5nfrhxxyxiy.jpg",
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712427005/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/maswlravxq12ecwvltlp.jpg",
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712426987/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/evlte8wqig11b3crxfrg.jpg",
+    ],
+    details: [
+      {
+        id: 1,
+        caption: [
+          `Introducing the "Bedside Memoir Side Table" – a personalized sanctuary of memories and craftsmanship. Designed specifically for your bedroom, this side table is more than just a piece of furniture; it's a tangible embodiment of cherished moments and skilled artistry.`,
+          `Crafted from a reclaimed wooden log cross-section, generously provided by a local sawmill owner, each table carries a unique narrative, preserving the raw beauty of nature. Paired with handcrafted legs sourced from Kaikale, every detail speaks to the fusion of nostalgia and contemporary design.`,
+          `What sets the "Bedside Memoir Side Table" apart is the personal touch – each piece meticulously handcrafted by us. As you situate it beside your bed, it becomes more than just a functional accent; it becomes a vessel of memories, inviting you to reminisce and reflect on the journey that brought it to life.`,
         ],
       },
     ],

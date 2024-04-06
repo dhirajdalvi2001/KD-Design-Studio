@@ -15,7 +15,7 @@ import ThemeSwitch from "../Switch/ThemeSwitch";
 import { menuItems } from "../../utils/data";
 import Typography from "../Typography/Typography";
 
-export default function TopNavbar({ theme, setTheme }) {
+export default function TopNavbar({ theme, settheme }) {
   const location = useLocation();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -49,7 +49,7 @@ export default function TopNavbar({ theme, setTheme }) {
           </NavbarBrand>
 
           <div className="md:hidden flex items-center">
-            <ThemeSwitch theme={theme} setTheme={setTheme} />
+            <ThemeSwitch theme={theme} settheme={settheme} />
             <NavbarMenuToggle
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               className="!w-10 !h-10 !text-foreground-500"
@@ -59,11 +59,11 @@ export default function TopNavbar({ theme, setTheme }) {
         <div className="hidden md:flex items-center">
           <ThemeSwitch
             theme={theme}
-            setTheme={setTheme}
+            settheme={settheme}
             className="hidden md:block"
           />
           <NavbarContent
-            className="hidden md:flex md:flex-col gap-0 max-w-fit"
+            className="hidden md:!flex md:!flex-col gap-0 max-w-fit"
             justify="center"
           >
             {menuItems.map((item, index) => {
@@ -102,7 +102,7 @@ export default function TopNavbar({ theme, setTheme }) {
               <NavbarMenuItem key={`${item}-${index}`}>
                 <div
                   className={classNames(
-                    "w-full pl-2 text-base",
+                    "w-full pl-2 text-sm sm:text-base",
                     activeItem ? "text-red-600 line-through" : "text-foreground"
                   )}
                   onClick={() => navigateTo(item.href)}

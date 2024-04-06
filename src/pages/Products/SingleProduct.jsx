@@ -6,7 +6,7 @@ import Typography from "../../components/Typography/Typography";
 
 export default function SingleProduct() {
   const { slug } = useParams();
-  const product = products.find((pro) => (pro.slug = slug));
+  const product = products.find((pro) => pro.slug === slug);
   const breadcrumbOptions = [
     {
       label: "Products",
@@ -19,6 +19,7 @@ export default function SingleProduct() {
       allowClick: false,
     },
   ];
+
   return (
     <BodyLayout>
       <div className="w-full h-full flex flex-col md:flex-row max-md:gap-4">
@@ -32,17 +33,13 @@ export default function SingleProduct() {
               <div className="flex flex-col gap-2 text-justify">
                 <>
                   <Typography variant="title">{product.name}</Typography>
-                  <Typography variant="caption">{product.short}</Typography>
                 </>
                 <>
                   <Typography variant="caption">
                     Year: <span className="font-medium">{product.year}</span>
                   </Typography>
-                  <Typography variant="caption">
-                    Materials:{" "}
-                    <span className="font-medium">
-                      {product.materials.join(", ")}
-                    </span>
+                  <Typography variant="caption" className="italic">
+                    Prototype
                   </Typography>
                 </>
               </div>
@@ -52,9 +49,11 @@ export default function SingleProduct() {
                 if (detail?.listItems) {
                   return (
                     <div key={detail.id}>
-                      <Typography variant="p">
-                        <span className="font-medium">{detail?.title}</span>
-                      </Typography>
+                      {detail?.title && (
+                        <Typography variant="p">
+                          <span className="font-medium">{detail?.title}</span>
+                        </Typography>
+                      )}
                       <ol className="pl-4 list-decimal">
                         {detail?.listItems?.map((list, index) => {
                           return (

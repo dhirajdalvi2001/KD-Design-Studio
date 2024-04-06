@@ -1,6 +1,6 @@
 import BodyLayout from "../../components/Layout/BodyLayout";
 import Carousel from "react-bootstrap/Carousel";
-import { products } from "../../utils/data";
+import { carousalProducts, products } from "../../utils/data";
 import { useNavigate } from "react-router-dom";
 import Typography from "../../components/Typography/Typography";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
@@ -35,26 +35,33 @@ const Home = () => {
         fade
         touch
       >
-        {products[0]?.imgUrls?.map((image) => {
+        {carousalProducts?.map((product) => {
           return (
             <Carousel.Item
-              key={image}
+              key={product?.id}
               className="h-[90vh] !flex !justify-center !items-center"
             >
               <div
-                className="w-[90vw] h-[90vw] md:h-[40vw] md:w-[40vw] flex justify-center items-center overflow-hidden cursor-pointer"
+                className="w-[96vw] sm:w-[90vw] h-[90vw] md:h-[40vw] md:w-[40vw] flex justify-center items-center overflow-hidden cursor-pointer"
                 onClick={() => navigate(`/products/${products[0].slug}`)}
               >
-                <LazyLoadImage src={image} alt="" className="w-full" />
+                <LazyLoadImage
+                  src={product?.src}
+                  alt={product?.name}
+                  className="w-full"
+                />
               </div>
               <Carousel.Caption className="text-foreground-800 p-0 sm:hidden -z-10">
                 <div className="flex justify-between">
-                  <Typography variant="caption" className="">
-                    {products[0]?.name}
+                  <Typography
+                    variant="caption"
+                    className="text-[9px] sm:text-[11px] flex items-center w-fit"
+                  >
+                    {product?.name}
                   </Typography>
                   <Typography
                     variant="a"
-                    className="text-[11px] font-normal"
+                    className="text-[9px] sm:text-[11px] font-normal"
                     href="/products"
                   >
                     View all

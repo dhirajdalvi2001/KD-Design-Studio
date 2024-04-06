@@ -7,7 +7,7 @@ import classNames from "classnames";
 import Footer from "../Footer/Footer";
 
 const RootLayout = () => {
-  const [theme, setTheme] = useState("light");
+  const [theme, settheme] = useState("light");
   const location = useLocation();
   const showFooter =
     !location.pathname.startsWith("/products/") && location.pathname !== "/";
@@ -15,7 +15,7 @@ const RootLayout = () => {
   return (
     <div className={classNames(theme, "min-h-screen")}>
       <ToastContainer theme={theme} />
-      <TopNavbar theme={theme} setTheme={setTheme} />
+      <TopNavbar theme={theme} settheme={settheme} />
       <Outlet />
       {showFooter && <Footer />}
     </div>

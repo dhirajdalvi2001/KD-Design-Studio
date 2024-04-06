@@ -1,5 +1,4 @@
 import BodyLayout from "../../components/Layout/BodyLayout";
-import ContactUs from "../../assets/contact-us.png";
 import { Button, Input, Textarea } from "@nextui-org/react";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -13,7 +12,7 @@ import { contactImg } from "../../utils/data";
 const contactFormSchema = yup.object().shape({
   name: yup.string().required("Name is required").trim(),
   email: yup.string().email().required("Email is required"),
-  message: yup.string().required("Messag is required").trim(),
+  message: yup.string().required("Message is required").trim(),
 });
 
 const Contact = () => {

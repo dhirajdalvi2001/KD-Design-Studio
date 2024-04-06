@@ -12,7 +12,7 @@ const ThemeSwitch = (props) => {
     getInputProps,
     getWrapperProps,
   } = useSwitch(props);
-  const { theme, setTheme } = props;
+  const { theme, settheme } = props;
   return (
     <div className={classNames("flex flex-col", className)}>
       <Component {...getBaseProps()}>
@@ -20,7 +20,7 @@ const ThemeSwitch = (props) => {
           <input
             {...getInputProps()}
             onClick={() =>
-              setTheme((prev) => (prev === "light" ? "dark" : "light"))
+              settheme((prev) => (prev === "light" ? "dark" : "light"))
             }
           />
         </VisuallyHidden>

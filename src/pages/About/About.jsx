@@ -47,14 +47,14 @@ const About = () => {
                   Kunal Dalvi, a talented architect based in Raigad, brings
                   three years of professional expertise to the table. Inspired
                   by the region&apos;s rich cultural heritage, he merges
-                  tradition with modernity in his architectural creations.
-                  Recently expanding his horizons, Kunal has delved into product
-                  design, infusing his designs with creativity and
-                  functionality. His passion for innovation and attention to
-                  detail shine through in every project he undertakes. With a
-                  commitment to excellence and a drive to push boundaries, Kunal
-                  is poised to leave a lasting impact on the architectural and
-                  product design landscape.
+                  tradition with modernity in his architectural work. Recently
+                  expanding his horizons, and has delved into product design,
+                  infusing his designs with creativity and functionality. His
+                  passion for innovation and attention to detail shine through
+                  in every project he undertakes. With a commitment for
+                  excellence and a drive to push boundaries, Kunal is poised to
+                  leave a lasting impact on the architectural and product design
+                  landscape.
                 </Typography>
               </div>
             </div>

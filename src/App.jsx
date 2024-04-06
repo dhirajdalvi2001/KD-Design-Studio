@@ -1,13 +1,14 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import FallbackLoader from "./components/Loader/FallbackLoader";
 import RootLayout from "./components/Layout/RootLayout";
-import Products from "./pages/Products/Products";
-import Contact from "./pages/Contact/Contact";
-import { Suspense } from "react";
-import Home from "./pages/Home/Home";
-import About from "./pages/About/About";
+import { Suspense, lazy } from "react";
 import "./App.css";
-import SingleProduct from "./pages/Products/SingleProduct";
+
+const Home = lazy(() => import("./pages/Home/Home"));
+const Products = lazy(() => import("./pages/Products/Products"));
+const SingleProduct = lazy(() => import("./pages/Products/SingleProduct"));
+const About = lazy(() => import("./pages/About/About"));
+const Contact = lazy(() => import("./pages/Contact/Contact"));
 
 const router = createBrowserRouter([
   {
