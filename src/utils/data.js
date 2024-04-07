@@ -21,37 +21,37 @@ export const carousalProducts = [
     id: 1,
     name: "Simpliseat",
     slug: "simpliseat",
-    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833647/KD%20Design%20Studio/Simpliseat/jre0zjplazlvuxnimmei.jpg",
+    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712508009/KD%20Design%20Studio/Simpliseat/f7bc81jmw8w4mhszruaw.jpg",
   },
   {
     id: 2,
     name: "Bedside Memoir Side Table",
     slug: "begside-momoir-side-table",
-    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712427002/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/f2rgrxa1vwyxgvuj58jz.jpg",
+    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712508159/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/wpz4powqrgl7j2d0xa1d.jpg",
   },
   {
     id: 3,
     name: "Simpliseat",
     slug: "simpliseat",
-    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833675/KD%20Design%20Studio/Simpliseat/uuxdrtsyczzynnqpdykb.jpg",
+    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833663/KD%20Design%20Studio/Simpliseat/pexij65b2fklmq8pq3r9.jpg",
   },
   {
     id: 4,
     name: "Bedside Memoir Side Table",
     slug: "begside-momoir-side-table",
-    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712426926/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/mfnflz2hv5nfrhxxyxiy.jpg",
+    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712508162/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/r7slgidhnx6ctbl0rxiq.jpg",
   },
   {
     id: 5,
     name: "Simpliseat",
     slug: "simpliseat",
-    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833689/KD%20Design%20Studio/Simpliseat/i7ae3y0kofal1madlpzx.jpg",
+    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712508014/KD%20Design%20Studio/Simpliseat/kjl3fxclzhgg6cqdrumh.jpg",
   },
   {
     id: 6,
     name: "Bedside Memoir Side Table",
     slug: "begside-momoir-side-table",
-    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712427005/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/maswlravxq12ecwvltlp.jpg",
+    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712508164/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/jevjiuhyucoowpou6v26.jpg",
   },
 ];
 
@@ -64,11 +64,12 @@ export const products = [
     thumbnail:
       "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711809326/KD%20Design%20Studio/Simpliseat/thumbnail.svg",
     imgUrls: [
-      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833647/KD%20Design%20Studio/Simpliseat/jre0zjplazlvuxnimmei.jpg",
-      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833675/KD%20Design%20Studio/Simpliseat/uuxdrtsyczzynnqpdykb.jpg",
-      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833689/KD%20Design%20Studio/Simpliseat/i7ae3y0kofal1madlpzx.jpg",
-      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833683/KD%20Design%20Studio/Simpliseat/xnibtgqvbftj7hnhh9k8.jpg",
-      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833679/KD%20Design%20Studio/Simpliseat/bnnqh6e35anerxk22yzq.jpg",
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712508009/KD%20Design%20Studio/Simpliseat/f7bc81jmw8w4mhszruaw.jpg",
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833663/KD%20Design%20Studio/Simpliseat/pexij65b2fklmq8pq3r9.jpg",
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712508014/KD%20Design%20Studio/Simpliseat/kjl3fxclzhgg6cqdrumh.jpg",
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712508009/KD%20Design%20Studio/Simpliseat/veax9snjxahlodablrt5.jpg",
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712508009/KD%20Design%20Studio/Simpliseat/k4xavrmvvxow6mfkb1wn.jpg",
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712508009/KD%20Design%20Studio/Simpliseat/lsuffzwngr2z6llcpdrz.jpg",
     ],
     details: [
       {
@@ -136,10 +137,14 @@ export const products = [
     thumbnail:
       "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712426405/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/thumbnail.svg",
     imgUrls: [
-      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712427002/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/f2rgrxa1vwyxgvuj58jz.jpg",
-      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712426926/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/mfnflz2hv5nfrhxxyxiy.jpg",
-      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712427005/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/maswlravxq12ecwvltlp.jpg",
-      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712426987/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/evlte8wqig11b3crxfrg.jpg",
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712508159/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/wpz4powqrgl7j2d0xa1d.jpg",
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712508162/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/r7slgidhnx6ctbl0rxiq.jpg",
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712508164/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/jevjiuhyucoowpou6v26.jpg",
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712508162/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/gcemn8ziljmn9quwdqnf.jpg",
+    ],
+    videoUrls: [
+      "https://res.cloudinary.com/dzwubvbs6/video/upload/v1712508172/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/gqex6c24d6t1hytfcjno.mp4",
+      "https://res.cloudinary.com/dzwubvbs6/video/upload/v1712508168/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/b4ejdmhua1zmx8bvwsnf.mp4",
     ],
     details: [
       {

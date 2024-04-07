@@ -42,13 +42,13 @@ const Home = () => {
               className="h-[90vh] !flex !justify-center !items-center"
             >
               <div
-                className="w-[96vw] sm:w-[90vw] h-[90vw] md:h-[40vw] md:w-[40vw] flex justify-center items-center overflow-hidden cursor-pointer"
+                className="w-screen h-[100vw] md:h-[40vw] md:w-[40vw] flex justify-center items-center overflow-hidden cursor-pointer"
                 onClick={() => navigate(`/products/${product.slug}`)}
               >
                 <LazyLoadImage
                   src={product?.src}
                   alt={product?.name}
-                  className="w-full"
+                  className="h-full"
                 />
               </div>
               <Carousel.Caption className="text-foreground-800 p-0 sm:hidden -z-10">

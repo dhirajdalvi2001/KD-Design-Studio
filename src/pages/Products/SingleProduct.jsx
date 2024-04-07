@@ -91,6 +91,19 @@ export default function SingleProduct() {
           </div>
         </div>
         <div className="pb-14 md:py-14 flex flex-col items-center gap-14">
+          {product?.videoUrls?.map((video, index) => {
+            return (
+              <video
+                key={video}
+                src={video}
+                alt={slug + "_video_" + index}
+                className="w-[90%]"
+                autoPlay="autoplay"
+                loop
+                muted
+              />
+            );
+          })}
           {product.imgUrls.map((image, index) => {
             return (
               <img
