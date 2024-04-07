@@ -21,7 +21,7 @@ export const carousalProducts = [
     id: 1,
     name: "Simpliseat",
     slug: "simpliseat",
-    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712508009/KD%20Design%20Studio/Simpliseat/f7bc81jmw8w4mhszruaw.jpg",
+    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712510883/KD%20Design%20Studio/Simpliseat/izqyvv7js4lv8jl95qgj.jpg",
   },
   {
     id: 2,
@@ -33,7 +33,7 @@ export const carousalProducts = [
     id: 3,
     name: "Simpliseat",
     slug: "simpliseat",
-    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833663/KD%20Design%20Studio/Simpliseat/pexij65b2fklmq8pq3r9.jpg",
+    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712510883/KD%20Design%20Studio/Simpliseat/xvsbph26q3eburgietmi.jpg",
   },
   {
     id: 4,
@@ -45,7 +45,7 @@ export const carousalProducts = [
     id: 5,
     name: "Simpliseat",
     slug: "simpliseat",
-    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712508014/KD%20Design%20Studio/Simpliseat/kjl3fxclzhgg6cqdrumh.jpg",
+    src: "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712510253/KD%20Design%20Studio/Simpliseat/rwr7syu4sj7oiasapzn9.jpg",
   },
   {
     id: 6,
@@ -64,12 +64,11 @@ export const products = [
     thumbnail:
       "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711809326/KD%20Design%20Studio/Simpliseat/thumbnail.svg",
     imgUrls: [
-      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712508009/KD%20Design%20Studio/Simpliseat/f7bc81jmw8w4mhszruaw.jpg",
-      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1711833663/KD%20Design%20Studio/Simpliseat/pexij65b2fklmq8pq3r9.jpg",
-      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712508014/KD%20Design%20Studio/Simpliseat/kjl3fxclzhgg6cqdrumh.jpg",
-      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712508009/KD%20Design%20Studio/Simpliseat/veax9snjxahlodablrt5.jpg",
-      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712508009/KD%20Design%20Studio/Simpliseat/k4xavrmvvxow6mfkb1wn.jpg",
-      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712508009/KD%20Design%20Studio/Simpliseat/lsuffzwngr2z6llcpdrz.jpg",
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712510883/KD%20Design%20Studio/Simpliseat/izqyvv7js4lv8jl95qgj.jpg",
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712510883/KD%20Design%20Studio/Simpliseat/xvsbph26q3eburgietmi.jpg",
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712510253/KD%20Design%20Studio/Simpliseat/rwr7syu4sj7oiasapzn9.jpg",
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712510882/KD%20Design%20Studio/Simpliseat/xyor4hizalvm7um3rie7.jpg",
+      "https://res.cloudinary.com/dzwubvbs6/image/upload/v1712510255/KD%20Design%20Studio/Simpliseat/fh80dafuhb0izmwaprwr.jpg",
     ],
     details: [
       {

@@ -1,1 +1,0 @@
-import{d as o,c as s}from"./index-oCPceLoj.js";function r({children:e,className:t}){return o.jsxDEV("div",{className:s("pt-16 md:pt-24 min-h-screen bg-foreground-50",t),children:e},void 0,!1,{fileName:"D:/ENGINEERING/ExtraStudyMaterial/WebDevelopment/GitHubProjects/KDDesignStudio/src/components/Layout/BodyLayout.jsx",lineNumber:5,columnNumber:5},this)}export{r as B};
