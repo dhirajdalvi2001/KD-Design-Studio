@@ -1,6 +1,6 @@
-import BodyLayout from "../../components/Layout/BodyLayout";
-import Typography from "../../components/Typography/Typography";
-import { aboutImg, socials } from "../../utils/data";
+import BodyLayout from '../../components/Layout/BodyLayout';
+import Typography from '../../components/Typography/Typography';
+import { aboutImg, socials } from '../../utils/data';
 
 const About = () => {
   return (
@@ -18,17 +18,15 @@ const About = () => {
                   <Typography
                     variant="caption"
                     className="cursor-pointer w-fit hover:line-through"
-                    href={socials.instagram}
                   >
-                    instagram
+                    <a href={socials.instagram}>instagram</a>
                   </Typography>
                   <Typography variant="caption">&nbsp;/&nbsp;</Typography>
                   <Typography
                     variant="caption"
                     className="cursor-pointer w-fit hover:line-through"
-                    href={socials.facebook}
                   >
-                    facebook
+                    <a href={socials.facebook}>facebook</a>
                   </Typography>
                 </div>
               </div>
