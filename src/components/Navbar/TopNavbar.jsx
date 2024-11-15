@@ -46,6 +46,7 @@ export default function TopNavbar({ theme, settheme }) {
                 className="w-[80px] md:w-[100px]"
               />
             </div>
+            Test
           </NavbarBrand>
 
           <div className="md:hidden flex items-center">
