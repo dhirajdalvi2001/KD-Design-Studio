@@ -9,8 +9,10 @@ git pull origin production
 sudo docker stop react-frontend-container
 sudo docker rm react-frontend-container
 
-# Rebuild and run Docker container
-sudo docker build -t react-frontend .
-sudo docker run -d -p 80:80 --name react-frontend-container react-frontend
+# Rebuild Docker container
+sudo docker build -t react-frontend . || { echo "Error during build"; exit 1; }
+
+# Run Docker container
+sudo docker run -d -p 80:80 --name react-frontend-container react-frontend || { echo "Error during run"; sudo docker logs react-frontend-container; exit 1; }
 
 echo "Production updated successfully!"
