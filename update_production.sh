@@ -19,7 +19,7 @@ sudo docker run -d \
   --name react-frontend-container \
   -p 80:80 \
   -p 443:443 \
-  -v /etc/letsencrypt/live/kd-studio.in:/etc/letsencrypt/live/kd-studio.in:ro \
+  -v /etc/letsencrypt:/etc/letsencrypt:ro \
   react-frontend
  || { echo "Error during run"; sudo docker logs react-frontend-container; exit 1; }
 
