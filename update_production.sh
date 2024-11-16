@@ -24,3 +24,4 @@ sudo docker run -d \
 sudo docker logs react-frontend-container
 sudo docker ps
 echo "Production updated successfully!"
+
