@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export DOCKER_BUILDKIT=1
+
 # Pull latest changes from production branch
 git checkout production
 git stash
