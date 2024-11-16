@@ -2,6 +2,7 @@
 
 # Pull latest changes from production branch
 git checkout production
+git stash
 git pull origin production
 
 # Stop and remove existing container
