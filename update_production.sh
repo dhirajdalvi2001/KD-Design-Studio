@@ -21,7 +21,6 @@ sudo docker run -d \
   -p 443:443 \
   -v /etc/letsencrypt:/etc/letsencrypt:ro \
   react-frontend || { echo "Error during run"; sudo docker logs react-frontend-container; exit 1; }
-
-echo "Production updated successfully!"
 sudo docker logs react-frontend-container
 sudo docker ps
+echo "Production updated successfully!"
