@@ -23,3 +23,5 @@ sudo docker run -d \
   react-frontend || { echo "Error during run"; sudo docker logs react-frontend-container; exit 1; }
 
 echo "Production updated successfully!"
+sudo docker logs react-frontend-container
+sudo docker ps
