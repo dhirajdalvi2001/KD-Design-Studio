@@ -6,14 +6,11 @@ git stash
 git pull origin production
 
 # Stop and remove existing container
-sudo docker stop react-frontend-container
-sudo docker rm react-frontend-container
+sudo docker stop react-frontend-container || echo "Container not running"
+sudo docker rm react-frontend-container || echo "Container not found"
+
 # Rebuild Docker container
 sudo docker build -t react-frontend . || { echo "Error during build"; exit 1; }
-
-# Stop and remove existing container
-sudo docker stop react-frontend-container
-sudo docker rm react-frontend-container
 
 # Run the Docker container again
 sudo docker run -d \
