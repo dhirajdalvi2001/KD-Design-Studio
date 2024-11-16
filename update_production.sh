@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# Navigate to project directory if not already there
-if [ "$(pwd)" != "/home/ubuntu/kd-studio-fe" ]; then
-  cd /home/ubuntu/kd-studio-fe
-fi
-
 # Pull latest changes from production branch
 git checkout production
 git pull origin production
