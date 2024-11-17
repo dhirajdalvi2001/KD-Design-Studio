@@ -6,7 +6,6 @@ COPY package*.json ./
 RUN npm install -g npm@latest && npm install --legacy-peer-deps
 
 # Cache npm dependencies
-COPY .npmrc .npmrc
 RUN npm ci --legacy-peer-deps
 
 COPY . .
