@@ -5,16 +5,7 @@ export DOCKER_BUILDKIT=1
 # Pull latest changes from production branch
 git checkout production
 git stash
-
-# Attempt to pull latest changes and handle permission error
-if ! git pull origin production; then
-  echo "Git pull failed due to insufficient permissions. Attempting to fix permissions..."
-  sudo chown -R $(whoami) .git/
-  if ! git pull origin production; then
-    echo "Git pull failed again after attempting to fix permissions. Exiting."
-    exit 1
-  fi
-fi
+git pull origin production
 
 # Stop and remove existing container
 sudo docker stop react-frontend-container || echo "Container not running"
@@ -33,3 +24,4 @@ sudo docker run -d \
 sudo docker logs react-frontend-container
 sudo docker ps
 echo "Production updated successfully!"
+
