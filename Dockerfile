@@ -4,8 +4,13 @@ FROM node:18 as build
 WORKDIR /app
 COPY package*.json ./
 RUN npm install -g npm@latest && npm install --legacy-peer-deps
+
+# Cache npm dependencies
+COPY .npmrc .npmrc
+RUN npm ci --legacy-peer-deps
+
 COPY . .
-RUN npx update-browserslist-db@latest && npm run build
+RUN npm run build
 
 # Step 2: Use Nginx to serve the static files
 FROM nginx:alpine
@@ -18,6 +23,11 @@ COPY --from=build /app/dist /usr/share/nginx/html
 
 # Copy custom Nginx configuration file
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Create cache directories and set permissions
+RUN mkdir -p /var/cache/nginx/client_temp && \
+    chmod -R 755 /var/cache/nginx && \
+    chown -R nginx:nginx /var/cache/nginx
 
 # Expose port 80 and 443
 EXPOSE 80 443
