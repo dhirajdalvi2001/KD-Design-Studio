@@ -9,16 +9,13 @@ const Products = lazy(() => import("./pages/Products/Products"));
 const SingleProduct = lazy(() => import("./pages/Products/SingleProduct"));
 const About = lazy(() => import("./pages/About/About"));
 const Contact = lazy(() => import("./pages/Contact/Contact"));
+const Error404Page = lazy(() => import("./pages/Error404Page/Error404Page"));
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    // errorElement: (
-    //   <PrivateRoute>
-    //     <Error404Page />
-    //   </PrivateRoute>
-    // ),
+    errorElement: <Error404Page />,
     children: [
       {
         index: true,
