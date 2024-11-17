@@ -1,11 +1,11 @@
 # Step 1: Use Node.js image to build the Vite app
-FROM node:16 as build
+FROM node:18 as build
 
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN npm install -g npm@latest && npm install --legacy-peer-deps
 COPY . .
-RUN npm run build
+RUN npx update-browserslist-db@latest && npm run build
 
 # Step 2: Use Nginx to serve the static files
 FROM nginx:alpine
