@@ -1,5 +1,5 @@
 # Step 1: Use Node.js image to build the Vite app
-FROM node:18-alpine as build
+FROM node:18 as build
 
 WORKDIR /app
 COPY package*.json ./

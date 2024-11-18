@@ -1,28 +1,22 @@
 #!/bin/bash
 
-echo "🚀 Starting production update..."
+export DOCKER_BUILDKIT=1
 
 # Stop and remove existing container
-echo "Stopping existing container..."
-docker stop react-frontend-container || true
-docker rm react-frontend-container || true
+sudo docker stop react-frontend-container || echo "Container not running"
+sudo docker rm react-frontend-container || echo "Container not found"
 
-# Remove old image
-echo "Removing old image..."
-docker image rm react-frontend-image || true
+# Rebuild Docker container
+sudo docker build -t react-frontend . || { echo "Error during build"; exit 1; }
 
-# Build new image with optimized cache
-echo "Building new image..."
-DOCKER_BUILDKIT=1 docker build -t react-frontend-image .
-
-# Run new container
-echo "Starting new container..."
-docker run -d \
+# Run the Docker container again
+sudo docker run -d \
   --name react-frontend-container \
   -p 80:80 \
   -p 443:443 \
-  --restart unless-stopped \
-  react-frontend-image
-
-echo "✅ Update complete!"
+  -v /etc/letsencrypt:/etc/letsencrypt:ro \
+  react-frontend || { echo "Error during run"; sudo docker logs react-frontend-container; exit 1; }
+sudo docker logs react-frontend-container
+sudo docker ps
+echo "Production updated successfully!"
 
