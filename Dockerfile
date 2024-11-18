@@ -2,40 +2,33 @@
 FROM node:18-alpine as build
 
 WORKDIR /app
-
-# Copy only package files first to leverage Docker cache
 COPY package*.json ./
+RUN npm install -g npm@latest && npm install --legacy-peer-deps
 
-# Use npm ci instead of install, and clean npm cache
-RUN npm install -g npm@latest && \
-    npm ci --legacy-peer-deps && \
-    npm cache clean --force
+# Cache npm dependencies
+RUN npm ci --legacy-peer-deps
 
-# Copy only necessary files
-COPY src/ ./src/
-COPY public/ ./public/
-COPY index.html vite.config.js .env* ./
-
-# Build the app
+COPY . .
 RUN npm run build
 
-# Step 2: Use Nginx with multi-stage build
+# Step 2: Use Nginx to serve the static files
 FROM nginx:alpine
 
-# Remove default nginx static assets
+# Remove the default nginx index page
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copy only the built files from previous stage
+# Copy the built files from the build stage
 COPY --from=build /app/dist /usr/share/nginx/html
+
+# Copy custom Nginx configuration file
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Configure nginx in a single RUN to reduce layers
+# Create cache directories and set permissions
 RUN mkdir -p /var/cache/nginx/client_temp && \
     chmod -R 755 /var/cache/nginx && \
-    chown -R nginx:nginx /var/cache/nginx && \
-    # Optimize nginx
-    sed -i 's/worker_processes  1/worker_processes  auto/' /etc/nginx/nginx.conf
+    chown -R nginx:nginx /var/cache/nginx
 
+# Expose port 80 and 443
 EXPOSE 80 443
 
 CMD ["nginx", "-g", "daemon off;"]
