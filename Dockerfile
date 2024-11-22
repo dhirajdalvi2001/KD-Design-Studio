@@ -3,13 +3,18 @@ FROM node:18 as build
 
 WORKDIR /app
 COPY package*.json ./
-RUN npm install -g npm@latest && npm install --legacy-peer-deps
 
-# Cache npm dependencies
-RUN npm ci --legacy-peer-deps
+# Install dependencies and cache them
+RUN npm install -g npm@latest && npm ci --legacy-peer-deps
 
+# Update Browserslist database
+RUN npx update-browserslist-db@latest
+
+# Copy only the necessary files for the build
 COPY . .
-RUN npm run build
+
+# Use a more efficient build command
+RUN npm run build -- --max-old-space-size=4096
 
 # Step 2: Use Nginx to serve the static files
 FROM nginx:alpine
