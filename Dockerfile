@@ -1,39 +1,42 @@
-# Step 1: Use Node.js image to build the Vite app
-FROM node:18 as build
+# Step 1: Use Node.js alpine image to reduce base image size
+FROM node:18-alpine as build
 
 WORKDIR /app
 COPY package*.json ./
 
-# Install dependencies and cache them
-RUN npm install -g npm@latest && npm ci --legacy-peer-deps
+# Install dependencies with clean npm cache and production-only deps
+RUN npm install -g npm@latest && \
+    npm ci --legacy-peer-deps --production && \
+    npm cache clean --force
 
 # Update Browserslist database
 RUN npx update-browserslist-db@latest
 
-# Copy only the necessary files for the build
+# Copy only necessary files, excluding dev files
 COPY . .
 
-# Use a more efficient build command
-RUN npm run build -- --max-old-space-size=4096
+# Build with optimizations and cleanup
+RUN npm run build -- --max-old-space-size=4096 && \
+    rm -rf node_modules
 
-# Step 2: Use Nginx to serve the static files
+# Step 2: Use lightweight Nginx alpine
 FROM nginx:alpine
 
-# Remove the default nginx index page
-RUN rm -rf /usr/share/nginx/html/*
+# Remove default nginx static assets and clean apk cache
+RUN rm -rf /usr/share/nginx/html/* && \
+    rm -rf /var/cache/apk/*
 
-# Copy the built files from the build stage
+# Copy only the built files from build stage
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# Copy custom Nginx configuration file
+# Copy nginx config
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Create cache directories and set permissions
+# Create cache directories with proper permissions
 RUN mkdir -p /var/cache/nginx/client_temp && \
     chmod -R 755 /var/cache/nginx && \
     chown -R nginx:nginx /var/cache/nginx
 
-# Expose port 80 and 443
 EXPOSE 80 443
 
 CMD ["nginx", "-g", "daemon off;"]
