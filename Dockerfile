@@ -10,13 +10,13 @@ RUN npm install -g npm@latest && \
     npm cache clean --force
 
 # Update Browserslist database
-RUN npx update-browserslist-db@latest
+RUN npx update-browserslist-db@latest || npm install caniuse-lite && npm uninstall caniuse-lite
 
 # Copy only necessary files, excluding dev files
 COPY . .
 
 # Build with optimizations and cleanup
-RUN npm run build -- --max-old-space-size=4096 && \
+RUN npm run build && \
     rm -rf node_modules
 
 # Step 2: Use lightweight Nginx alpine
