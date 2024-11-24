@@ -26,7 +26,7 @@ export const carousalProducts = [
   {
     id: 2,
     name: 'Bedside Memoir Side Table',
-    slug: 'begside-momoir-side-table',
+    slug: 'bedside-momoir-side-table',
     src: 'https://res.cloudinary.com/dzwubvbs6/image/upload/v1714149235/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/chair-image-1.webp',
   },
   {
@@ -38,7 +38,7 @@ export const carousalProducts = [
   {
     id: 4,
     name: 'Bedside Memoir Side Table',
-    slug: 'begside-momoir-side-table',
+    slug: 'bedside-momoir-side-table',
     src: 'https://res.cloudinary.com/dzwubvbs6/image/upload/v1714149275/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/chair-image-2.webp',
   },
   {
@@ -50,7 +50,7 @@ export const carousalProducts = [
   {
     id: 6,
     name: 'Bedside Memoir Side Table',
-    slug: 'begside-momoir-side-table',
+    slug: 'bedside-momoir-side-table',
     src: 'https://res.cloudinary.com/dzwubvbs6/image/upload/v1714149277/KD%20Design%20Studio/Bedside%20Memoir%20Side%20Table/chair-image-3.webp',
   },
 ];
@@ -130,7 +130,7 @@ export const products = [
   },
   {
     id: 2,
-    slug: 'begside-momoir-side-table',
+    slug: 'bedside-momoir-side-table',
     name: 'Bedside Memoir Side Table',
     year: 2024,
     thumbnail:
