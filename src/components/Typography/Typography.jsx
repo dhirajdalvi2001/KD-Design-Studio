@@ -1,6 +1,6 @@
-import classNames from "classnames";
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import classNames from 'classnames';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Typography({
   children,
@@ -11,18 +11,22 @@ export default function Typography({
 }) {
   const navigate = useNavigate();
   function applyTextStyles() {
-    if (variant === "caption") {
-      return "text-xs text-foreground-600";
-    } else if (variant === "p") {
-      return "text-sm text-foreground-600";
-    } else if (variant === "subtitle") {
-      return "text-[15px] font-bold text-foreground-700";
-    } else if (variant === "title") {
-      return "text-base font-bold text-foreground-700";
-    } else if (variant === "a") {
-      return "text-[15px] font-bold text-red-600";
-    } else if (variant === "error") {
-      return "h-0 text-xs text-red-500";
+    if (variant === 'caption') {
+      return 'text-xs text-foreground-600';
+    } else if (variant === 'p') {
+      return 'text-sm text-foreground-600';
+    } else if (variant === 'subtitle') {
+      return 'text-[15px] font-bold text-foreground-700';
+    } else if (variant === 'title') {
+      return 'text-base font-bold text-foreground-700';
+    } else if (variant === 'a') {
+      return 'text-[15px] font-bold text-red-600';
+    } else if (variant === 'error') {
+      return 'h-0 text-xs text-red-500';
+    } else if (variant === 'heading') {
+      return 'text-lg lg:text-2xl xl:text-4xl font-bold text-foreground-700 uppercase';
+    } else if (variant === 'sub-heading') {
+      return 'text-base lg:text-xl xl:text-2xl font-semibold foreground-700 uppercase';
     }
   }
   function handleClick() {
