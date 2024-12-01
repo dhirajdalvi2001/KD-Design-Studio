@@ -3,8 +3,8 @@ import FallbackLoader from './components/Loader/FallbackLoader';
 import RootLayout from './components/Layout/RootLayout';
 import { Suspense, lazy } from 'react';
 import './App.css';
-import Login from './pages/Auth/Login/Login';
-import AuthLayout from './components/Layout/AuthLayout';
+// import Login from './pages/Auth/Login/Login';
+// import AuthLayout from './components/Layout/AuthLayout';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const Home = lazy(() => import('./pages/Home/Home'));
@@ -67,17 +67,17 @@ const router = createBrowserRouter([
       },
     ],
   },
-  {
-    path: '/auth',
-    element: <AuthLayout />,
-    errorElement: <Error404Page />,
-    children: [
-      {
-        path: '/auth/login',
-        element: <Login />,
-      },
-    ],
-  },
+  // {
+  //   path: '/auth',
+  //   element: <AuthLayout />,
+  //   errorElement: <Error404Page />,
+  //   children: [
+  //     {
+  //       path: '/auth/login',
+  //       element: <Login />,
+  //     },
+  //   ],
+  // },
 ]);
 const queryClient = new QueryClient();
 
