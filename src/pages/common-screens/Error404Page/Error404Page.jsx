@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import notFound from "../../assets/not-found.png";
+import { Link } from 'react-router-dom';
+import notFound from '../../../assets/not-found.png';
 
 const Error404Page = () => {
   return (

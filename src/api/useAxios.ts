@@ -41,7 +41,7 @@ export const useAxios = () => {
           try {
             const refreshToken = localStorage.getItem('refreshToken');
             const response = await axiosInstance.post('/iam/login/refresh/', {
-              refreshToken,
+              refresh_token: refreshToken,
             });
 
             const { accessToken } = response.data;
@@ -72,7 +72,8 @@ export const useAxios = () => {
   function handleLogout() {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
-    navigate('/auth/login');
+    localStorage.removeItem('user');
+    navigate('/');
   }
 
   return { axiosInstance, handleLogout, accessToken, refreshToken, isLoggedIn };

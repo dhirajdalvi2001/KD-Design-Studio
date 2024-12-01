@@ -8,6 +8,7 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
+  Button,
 } from '@nextui-org/react';
 import Logo from '../../assets/logo-without-text.png';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -16,14 +17,12 @@ import { menuItems } from '../../utils/data';
 import Typography from '../Typography/Typography';
 import { useAxios } from '../../api/useAxios';
 
-export default function TopNavbar({ theme, settheme }) {
+export default function TopNavbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const { handleLogout, isLoggedIn } = useAxios();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathName = location.pathname;
-
-  console.log(isLoggedIn, 'isLoggedIn DD');
 
   function navigateTo(href) {
     if (href === 'logout') {
@@ -57,7 +56,14 @@ export default function TopNavbar({ theme, settheme }) {
           </NavbarBrand>
 
           <div className="md:hidden flex items-center">
-            <ThemeSwitch theme={theme} settheme={settheme} />
+            <Button
+              size="sm"
+              onClick={() => navigateTo('/admin')}
+              className="mr-3"
+            >
+              Go to Admin
+            </Button>
+            <ThemeSwitch />
             <NavbarMenuToggle
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
               className="!w-10 !h-10 !text-foreground-500"
@@ -65,11 +71,14 @@ export default function TopNavbar({ theme, settheme }) {
           </div>
         </NavbarContent>
         <div className="hidden md:flex items-center">
-          <ThemeSwitch
-            theme={theme}
-            settheme={settheme}
-            className="hidden md:block"
-          />
+          <Button
+            size="sm"
+            onClick={() => navigateTo('/admin')}
+            className="mr-3"
+          >
+            Go to Admin
+          </Button>
+          <ThemeSwitch className="hidden md:block" />
           <NavbarContent
             className="hidden md:!flex md:!flex-col gap-0 max-w-fit"
             justify="center"
@@ -78,6 +87,9 @@ export default function TopNavbar({ theme, settheme }) {
               const activeItem =
                 item.href === pathName || pathName.startsWith(item.href);
               if (item.href === '/') return null;
+
+              const loginOption = !isLoggedIn && item.title === 'Login';
+              const logoutOption = isLoggedIn && item.title === 'Logout';
 
               if (!isLoggedIn && item.title === 'Logout') {
                 return null;
@@ -96,7 +108,9 @@ export default function TopNavbar({ theme, settheme }) {
                       'w-fit px-4 flex items-center cursor-pointer transition-all hover:line-through !text-xs',
                       activeItem
                         ? 'text-red-600 line-through'
-                        : 'text-foreground'
+                        : 'text-foreground',
+                      loginOption ? 'text-blue-400 font-extrabold' : '',
+                      logoutOption ? 'text-red-600 font-extrabold' : ''
                     )}
                     onClick={() => navigateTo(item.href)}
                   >

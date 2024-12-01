@@ -1,10 +1,10 @@
 import { Button, Input } from '@nextui-org/react';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import { loginFormSchema } from '../../../utils/validations/login-validations';
+import { loginFormSchema } from '../../../../utils/validations/login-validations';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useAxios } from '../../../api/useAxios';
+import { useAxios } from '../../../../api/useAxios';
 import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
@@ -55,7 +55,7 @@ export default function Login() {
         placeholder="Enter your username"
         disabled={isPending}
         {...register('username')}
-        errorMessage={errors.username?.message}
+        errorMessage={errors?.username?.message}
         required
       />
       <Input
@@ -64,6 +64,7 @@ export default function Login() {
         variant="underlined"
         placeholder="Enter your password"
         disabled={isPending}
+        type="password"
         {...register('password')}
         errorMessage={errors.password?.message}
         required

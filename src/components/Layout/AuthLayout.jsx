@@ -1,16 +1,31 @@
 import classNames from 'classnames';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo-without-text.png';
 import Typography from '../Typography/Typography';
+import { useAxios } from '../../api/useAxios';
+import { useEffect } from 'react';
 
 export default function AuthLayout() {
+  const navigate = useNavigate();
   const year = new Date().getFullYear();
   const copyrightText = `@${year} KD Studio`;
+  const { isLoggedIn } = useAxios();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate(-1);
+    }
+  }, [isLoggedIn, navigate]);
+
+  if (isLoggedIn) {
+    return null;
+  }
+
   return (
     <div
       className={classNames('min-h-screen flex justify-center items-center')}
     >
-      <div className="bg-white max-md:hidden md:w-[45vw] lg:w-[50vw] xl:w-[55vw] h-screen flex flex-col justify-center">
+      <div className="bg-white max-md:hidden md:w-[45vw] lg:w-[50vw] xl:w-[60vw] h-screen flex flex-col justify-center">
         <div className="max-md:px-3 lg:px-20 flex items-center-gap-4">
           <Link to="/">
             <img
@@ -26,8 +41,8 @@ export default function AuthLayout() {
           <p></p>
         </div>
       </div>
-      <div className="w-full md:w-[55vw] lg:w-[50vw] xl:w-[45vw] h-screen flex justify-center items-center bg-foreground-800">
-        <div className="mx-8 sm:mx-20 px-4 max-md:py-4 md:p-10 w-full h-[450px] bg-foreground-100 flex flex-col justify-between gap-10">
+      <div className="w-full md:w-[55vw] lg:w-[50vw] xl:w-[40vw] h-screen flex justify-center items-center bg-foreground-800">
+        <div className="mx-8 sm:mx-20 px-4 max-md:py-4 md:p-10 w-full h-[450px] bg-white flex flex-col justify-between gap-10">
           {/* Form Header */}
           <div className="h-20 flex justify-center items-center gap-1 sm:gap-3">
             <Link to="/">
