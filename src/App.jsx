@@ -5,6 +5,7 @@ import { Suspense, lazy } from 'react';
 import './App.css';
 import Login from './pages/Auth/Login/Login';
 import AuthLayout from './components/Layout/AuthLayout';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const Home = lazy(() => import('./pages/Home/Home'));
 const Products = lazy(() => import('./pages/Products/Products'));
@@ -78,12 +79,15 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <main>
-      <RouterProvider router={router} />
-    </main>
+    <QueryClientProvider client={queryClient}>
+      <main>
+        <RouterProvider router={router} />
+      </main>
+    </QueryClientProvider>
   );
 }
 

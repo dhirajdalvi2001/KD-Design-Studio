@@ -1,5 +1,5 @@
-import { useState } from "react";
-import classNames from "classnames";
+import { useState } from 'react';
+import classNames from 'classnames';
 import {
   Navbar,
   NavbarBrand,
@@ -8,20 +8,28 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-} from "@nextui-org/react";
-import Logo from "../../assets/logo-without-text.png";
-import { useLocation, useNavigate } from "react-router-dom";
-import ThemeSwitch from "../Switch/ThemeSwitch";
-import { menuItems } from "../../utils/data";
-import Typography from "../Typography/Typography";
+} from '@nextui-org/react';
+import Logo from '../../assets/logo-without-text.png';
+import { useLocation, useNavigate } from 'react-router-dom';
+import ThemeSwitch from '../Switch/ThemeSwitch';
+import { menuItems } from '../../utils/data';
+import Typography from '../Typography/Typography';
+import { useAxios } from '../../api/useAxios';
 
 export default function TopNavbar({ theme, settheme }) {
   const location = useLocation();
   const navigate = useNavigate();
+  const { handleLogout, isLoggedIn } = useAxios();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathName = location.pathname;
 
+  console.log(isLoggedIn, 'isLoggedIn DD');
+
   function navigateTo(href) {
+    if (href === 'logout') {
+      handleLogout();
+      return;
+    }
     navigate(href);
     setIsMenuOpen(false);
   }
@@ -37,7 +45,7 @@ export default function TopNavbar({ theme, settheme }) {
         <NavbarContent className="flex justify-between h-16 md:h-24">
           <NavbarBrand>
             <div
-              onClick={() => navigateTo("/")}
+              onClick={() => navigateTo('/')}
               className="font-bold text-inherit h-14 overflow-hidden cursor-pointer flex items-center"
             >
               <img
@@ -51,7 +59,7 @@ export default function TopNavbar({ theme, settheme }) {
           <div className="md:hidden flex items-center">
             <ThemeSwitch theme={theme} settheme={settheme} />
             <NavbarMenuToggle
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
               className="!w-10 !h-10 !text-foreground-500"
             />
           </div>
@@ -69,7 +77,14 @@ export default function TopNavbar({ theme, settheme }) {
             {menuItems.map((item, index) => {
               const activeItem =
                 item.href === pathName || pathName.startsWith(item.href);
-              if (item.href === "/") return null;
+              if (item.href === '/') return null;
+
+              if (!isLoggedIn && item.title === 'Logout') {
+                return null;
+              }
+              if (isLoggedIn && item.title === 'Login') {
+                return null;
+              }
               return (
                 <NavbarItem
                   key={`${item}-${index}`}
@@ -78,10 +93,10 @@ export default function TopNavbar({ theme, settheme }) {
                   <Typography
                     variant="subtitle"
                     className={classNames(
-                      "w-fit px-4 flex items-center cursor-pointer transition-all hover:line-through !text-xs",
+                      'w-fit px-4 flex items-center cursor-pointer transition-all hover:line-through !text-xs',
                       activeItem
-                        ? "text-red-600 line-through"
-                        : "text-foreground"
+                        ? 'text-red-600 line-through'
+                        : 'text-foreground'
                     )}
                     onClick={() => navigateTo(item.href)}
                   >
@@ -94,16 +109,23 @@ export default function TopNavbar({ theme, settheme }) {
         </div>
         <NavbarMenu className="lg:hidden">
           {menuItems.map((item, index) => {
-            const homeActive = pathName === "/" && item.title === "Home";
+            const homeActive = pathName === '/' && item.title === 'Home';
             const products =
-              pathName.startsWith("/products/") && item.title === "Products";
+              pathName.startsWith('/products/') && item.title === 'Products';
             const activeItem = item.href === pathName || homeActive || products;
+
+            if (!isLoggedIn && item.title === 'Logout') {
+              return null;
+            }
+            if (isLoggedIn && item.title === 'Login') {
+              return null;
+            }
             return (
               <NavbarMenuItem key={`${item}-${index}`}>
                 <div
                   className={classNames(
-                    "w-full pl-2 text-sm sm:text-base",
-                    activeItem ? "text-red-600 line-through" : "text-foreground"
+                    'w-full pl-2 text-sm sm:text-base',
+                    activeItem ? 'text-red-600 line-through' : 'text-foreground'
                   )}
                   onClick={() => navigateTo(item.href)}
                 >
