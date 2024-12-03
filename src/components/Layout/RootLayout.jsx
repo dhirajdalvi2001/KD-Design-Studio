@@ -15,7 +15,7 @@ const RootLayout = () => {
 
   return (
     <div className={classNames(theme, 'min-h-screen')}>
-      <ToastContainer theme={theme} />
+      <ToastContainer theme={theme} position="top-right" className="z-[1000]" />
       <TopNavbar />
       <Outlet />
       {showFooter && <Footer />}

@@ -31,10 +31,10 @@ export default function AdminNavbar() {
       onMenuOpenChange={setIsMenuOpen}
       isMenuOpen={isMenuOpen}
       maxWidth="full"
-      className="bg-foreground-100 fixed top-0 w-full h-12 md:h-16"
+      className="bg-foreground-100 fixed top-0 w-full h-16"
     >
       <NavbarContent className="w-full">
-        <NavbarContent className="flex justify-between h-12 md:h-16">
+        <NavbarContent className="flex justify-between h-16">
           <NavbarBrand>
             <div
               onClick={() => navigateTo('/')}

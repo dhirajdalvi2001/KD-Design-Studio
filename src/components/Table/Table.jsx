@@ -14,6 +14,7 @@ export default function Table({
   headers = [],
   body = [],
   isLoading,
+  isListPage,
 }) {
   const loadingRows = Array(10).fill(null);
 
@@ -27,7 +28,10 @@ export default function Table({
         aria-label="Table"
         classNames={{
           wrapper: classNames(
-            'max-h-[calc(100vh-100px)] p-0 rounded-none',
+            'p-0 rounded-none',
+            isListPage
+              ? 'max-h-[calc(100vh-154px)]'
+              : 'max-h-[calc(100vh-100px)]',
             className
           ),
           base: 'overflow-auto bg-transparent shadow-none ',

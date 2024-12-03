@@ -1,4 +1,4 @@
-import { axiosInstance } from './axios';
+import { axiosInstance, customFetch } from './axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,6 +16,7 @@ export const useAxios = () => {
   useEffect(() => {
     const requestIntercept = axiosInstance.interceptors.request.use(
       (config) => {
+        // Get the latest access token on each request
         const token = localStorage.getItem('accessToken');
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
@@ -40,24 +41,33 @@ export const useAxios = () => {
 
           try {
             const refreshToken = localStorage.getItem('refreshToken');
-            const response = await axiosInstance.post('/iam/login/refresh/', {
+            const response = await customFetch.post('/iam/login/refresh/', {
               refresh_token: refreshToken,
             });
 
-            const { accessToken } = response.data;
-            localStorage.setItem('accessToken', accessToken);
+            const newAccessToken = response?.data?.data?.access_token;
+            const userInfo = response?.data?.data?.user_data;
+            localStorage.setItem('accessToken', newAccessToken);
+            localStorage.setItem('user', JSON.stringify(userInfo));
 
-            originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+            // Update the Authorization header with new access token
+            originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+            // Update axiosInstance default headers
+            axiosInstance.defaults.headers.common[
+              'Authorization'
+            ] = `Bearer ${newAccessToken}`;
+
             return axiosInstance(originalRequest);
           } catch (refreshError) {
-            // Handle refresh token failure (e.g., logout user)
+            // Handle refresh token failure
+            localStorage.setItem('redirectPath', window.location.pathname);
             localStorage.removeItem('accessToken');
             localStorage.removeItem('refreshToken');
             localStorage.removeItem('user');
+            window.location.href = '/auth/login';
             return Promise.reject(refreshError.response.data);
           }
         }
-
         return Promise.reject(error);
       }
     );

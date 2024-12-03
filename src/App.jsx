@@ -21,6 +21,9 @@ import Login from './pages/common-screens/Auth/Login/Login';
 // Admin Screens
 import Dashboard from './pages/admin-screens/Dashboard/Dashboard';
 import Roles from './pages/admin-screens/ManageUsers/Roles/Roles';
+import NewRole from './pages/admin-screens/ManageUsers/Roles/NewRole';
+import Users from './pages/admin-screens/ManageUsers/Users/Users';
+import NewUser from './pages/admin-screens/ManageUsers/Users/NewUser';
 
 const router = createBrowserRouter([
   {
@@ -97,6 +100,26 @@ const router = createBrowserRouter([
       {
         path: '/admin/manage-users/roles',
         element: <Roles />,
+      },
+      {
+        path: '/admin/manage-users/roles/new',
+        element: <NewRole />,
+      },
+      {
+        path: '/admin/manage-users/roles/:roleId',
+        element: <NewRole />,
+      },
+      {
+        path: '/admin/manage-users/users',
+        element: <Users />,
+      },
+      {
+        path: '/admin/manage-users/users/new',
+        element: <NewUser />,
+      },
+      {
+        path: '/admin/manage-users/users/:userId',
+        element: <NewUser />,
       },
     ],
   },
