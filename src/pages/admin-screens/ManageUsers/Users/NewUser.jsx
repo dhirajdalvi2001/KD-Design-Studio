@@ -4,11 +4,12 @@ import { useAxios } from '../../../../api/useAxios';
 import AdminBodyLayout from '../../../../components/Layout/AdminBodyLayout';
 import { Button, Input } from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
-// import { initialValue } from '../../../../utils/validations/user-validation';
-// import { yupResolver } from '@hookform/resolvers/yup';
+import { initialValue } from '../../../../utils/validations/user-validations';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import onError from '../../../../utils/onError';
+import { userFormSchema } from '../../../../utils/validations/user-validations';
 
 export default function NewUser() {
   const { userId } = useParams();
@@ -23,8 +24,8 @@ export default function NewUser() {
     reset,
     formState: { errors },
   } = useForm({
-    // defaultValues: initialValue,
-    // resolver: yupResolver(userFormSchema),
+    defaultValues: initialValue,
+    resolver: yupResolver(userFormSchema),
   });
 
   // User Details
@@ -70,7 +71,9 @@ export default function NewUser() {
 
   useEffect(() => {
     if (userDetails) {
-      setValue('name', userDetails.name);
+      setValue('username', userDetails.username);
+      setValue('email', userDetails.email);
+      setValue('role', userDetails.role);
     }
     if (!userId) {
       reset({ ...initialValue });
@@ -105,9 +108,9 @@ export default function NewUser() {
           variant="bordered"
           className="w-[350px]"
           isDisabled={fieldsDisabled}
-          value={watch('name')}
-          errorMessage={errors.name?.message}
-          {...register('name')}
+          value={watch('username')}
+          errorMessage={errors.username?.message}
+          {...register('username')}
         />
         <div className="w-full h-[60px] flex items-center justify-start gap-3">
           <Button size="sm" variant="faded" onClick={() => navigate(-1)}>

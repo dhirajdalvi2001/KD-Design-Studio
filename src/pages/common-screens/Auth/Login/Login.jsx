@@ -6,10 +6,13 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAxios } from '../../../../api/useAxios';
 import { useNavigate } from 'react-router-dom';
+import { themeAtom } from '../../../../utils/globalAtom';
+import { useSetAtom } from 'jotai';
 
 export default function Login() {
   const { axiosInstance } = useAxios();
   const navigate = useNavigate();
+  const setTheme = useSetAtom(themeAtom);
   const {
     register,
     handleSubmit,
@@ -25,6 +28,7 @@ export default function Login() {
       return response.data;
     },
     onSuccess: (data) => {
+      setTheme('dark');
       const response = data.data;
       localStorage.setItem('accessToken', response.access_token);
       localStorage.setItem('refreshToken', response.refresh_token);

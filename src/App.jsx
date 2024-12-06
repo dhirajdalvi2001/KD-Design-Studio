@@ -92,6 +92,7 @@ const router = createBrowserRouter([
   {
     path: '/admin',
     element: <AdminLayout />,
+    errorElement: <Error404Page />,
     children: [
       {
         index: true,
