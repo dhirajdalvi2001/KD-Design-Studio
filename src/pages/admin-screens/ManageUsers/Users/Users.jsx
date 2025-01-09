@@ -25,6 +25,7 @@ export default function Users() {
       return response.data;
     },
     refetchOnMount: true,
+    gcTime: 5 * 60 * 1000, // 5 minutes
   });
 
   // Change Status
@@ -73,7 +74,7 @@ export default function Users() {
 
   return (
     <AdminBodyLayout
-      title="Roles"
+      title="Users"
       addNewButton="Add New User"
       addNewHRef="/admin/manage-users/users/new"
     >

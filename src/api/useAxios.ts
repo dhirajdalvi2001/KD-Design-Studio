@@ -1,16 +1,21 @@
+import { useAtom } from 'jotai';
 import { axiosInstance, customFetch } from './axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { authAtom } from '../utils/globalAtom';
 
 export const useAxios = () => {
   const navigate = useNavigate();
+  const [isAuthenticated, setIsAuthenticated] = useAtom(authAtom);
   const accessToken = localStorage.getItem('accessToken');
   const refreshToken = localStorage.getItem('refreshToken');
-  const [isLoggedIn, setIsLoggedIn] = useState(!!accessToken);
+  const stringUser = localStorage.getItem('user');
+  const user = stringUser ? JSON.parse(stringUser) : null;
+  const userId = user?.id;
 
-  useEffect(() => {
-    setIsLoggedIn(!!accessToken);
-  }, [accessToken]);
+  // useEffect(() => {
+  //   setIsAuthenticated(!!accessToken);
+  // }, [accessToken]);
 
   // Add interceptor to handle token refresh
   useEffect(() => {
@@ -47,13 +52,25 @@ export const useAxios = () => {
 
             const newAccessToken = response?.data?.data?.access_token;
             const userInfo = response?.data?.data?.user_data;
+            console.log(
+              newAccessToken,
+              userInfo,
+              'newAccessToken, userInfo DD'
+            );
             localStorage.setItem('accessToken', newAccessToken);
             localStorage.setItem('user', JSON.stringify(userInfo));
 
             // Update the Authorization header with new access token
-            originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+            originalRequest.headers[
+              'Authorization'
+            ] = `Bearer ${newAccessToken}`;
             // Update axiosInstance default headers
             axiosInstance.defaults.headers.common[
+              'Authorization'
+            ] = `Bearer ${newAccessToken}`;
+
+            // Ensure the Authorization header is added to the request
+            originalRequest.headers[
               'Authorization'
             ] = `Bearer ${newAccessToken}`;
 
@@ -80,11 +97,19 @@ export const useAxios = () => {
   }, []);
 
   function handleLogout() {
+    setIsAuthenticated(false);
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('user');
     navigate('/');
   }
 
-  return { axiosInstance, handleLogout, accessToken, refreshToken, isLoggedIn };
+  return {
+    axiosInstance,
+    handleLogout,
+    accessToken,
+    refreshToken,
+    user,
+    userId,
+  };
 };

@@ -26,6 +26,7 @@ export default function Roles() {
       return response.data;
     },
     refetchOnMount: true,
+    gcTime: 5 * 60 * 1000, // 5 minutes
   });
 
   // Delete Role

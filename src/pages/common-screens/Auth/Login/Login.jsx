@@ -6,13 +6,14 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAxios } from '../../../../api/useAxios';
 import { useNavigate } from 'react-router-dom';
-import { themeAtom } from '../../../../utils/globalAtom';
+import { authAtom, themeAtom } from '../../../../utils/globalAtom';
 import { useSetAtom } from 'jotai';
 
 export default function Login() {
   const { axiosInstance } = useAxios();
   const navigate = useNavigate();
   const setTheme = useSetAtom(themeAtom);
+  const setIsAuthenticated = useSetAtom(authAtom);
   const {
     register,
     handleSubmit,
@@ -28,10 +29,12 @@ export default function Login() {
       return response.data;
     },
     onSuccess: (data) => {
+      setIsAuthenticated(true);
       setTheme('dark');
       const response = data.data;
-      localStorage.setItem('accessToken', response.access_token);
-      localStorage.setItem('refreshToken', response.refresh_token);
+      console.log(data, response, 'data DD');
+      localStorage.setItem('accessToken', response.token.access_token);
+      localStorage.setItem('refreshToken', response.token.refresh_token);
       localStorage.setItem('user', JSON.stringify(response.user_data));
       toast.success('Login successful!');
       navigate('/');
@@ -49,34 +52,34 @@ export default function Login() {
   }
   return (
     <form
-      className="h-[260px] flex flex-col justify-center items-center gap-4"
+      className='h-[260px] flex flex-col justify-center items-center gap-4'
       onSubmit={handleSubmit(handleLogin)}
     >
       <Input
-        label="Username"
-        size="sm"
-        variant="underlined"
-        placeholder="Enter your username"
+        label='Username'
+        size='sm'
+        variant='underlined'
+        placeholder='Enter your username'
         disabled={isPending}
         {...register('username')}
         errorMessage={errors?.username?.message}
         required
       />
       <Input
-        label="Password"
-        size="sm"
-        variant="underlined"
-        placeholder="Enter your password"
+        label='Password'
+        size='sm'
+        variant='underlined'
+        placeholder='Enter your password'
         disabled={isPending}
-        type="password"
+        type='password'
         {...register('password')}
         errorMessage={errors.password?.message}
         required
       />
       <Button
-        type="submit"
-        variant="solid"
-        className="mt-4 h-8 rounded-none"
+        type='submit'
+        variant='solid'
+        className='mt-4 h-8 rounded-none'
         disabled={isPending}
         isLoading={isPending}
       >

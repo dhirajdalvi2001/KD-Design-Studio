@@ -16,11 +16,14 @@ import ThemeSwitch from '../Switch/ThemeSwitch';
 import { menuItems } from '../../utils/data';
 import Typography from '../Typography/Typography';
 import { useAxios } from '../../api/useAxios';
+import { authAtom } from '../../utils/globalAtom';
+import { useAtomValue } from 'jotai';
 
 export default function TopNavbar() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { handleLogout, isLoggedIn } = useAxios();
+  const { handleLogout } = useAxios();
+  const isAuthenticated = useAtomValue(authAtom);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathName = location.pathname;
 
@@ -37,30 +40,30 @@ export default function TopNavbar() {
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
       isMenuOpen={isMenuOpen}
-      maxWidth="full"
-      className="bg-foreground-100 fixed top-0 w-full h-16 md:h-24"
+      maxWidth='full'
+      className='bg-foreground-100 fixed top-0 w-full h-16 md:h-24'
     >
-      <NavbarContent className="w-full">
-        <NavbarContent className="flex justify-between h-16 md:h-24">
+      <NavbarContent className='w-full'>
+        <NavbarContent className='flex justify-between h-16 md:h-24'>
           <NavbarBrand>
             <div
               onClick={() => navigateTo('/')}
-              className="font-bold text-inherit h-14 overflow-hidden cursor-pointer flex items-center"
+              className='font-bold text-inherit h-14 overflow-hidden cursor-pointer flex items-center'
             >
               <img
                 src={Logo}
-                alt="KD-design-studio"
-                className="w-[80px] md:w-[100px]"
+                alt='KD-design-studio'
+                className='w-[80px] md:w-[100px]'
               />
             </div>
           </NavbarBrand>
 
-          <div className="md:hidden flex items-center">
-            {isLoggedIn && (
+          <div className='md:hidden flex items-center'>
+            {isAuthenticated && (
               <Button
-                size="sm"
+                size='sm'
                 onClick={() => navigateTo('/admin')}
-                className="mr-3"
+                className='mr-3'
               >
                 Go to Admin
               </Button>
@@ -68,46 +71,46 @@ export default function TopNavbar() {
             <ThemeSwitch />
             <NavbarMenuToggle
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-              className="!w-10 !h-10 !text-foreground-500"
+              className='!w-10 !h-10 !text-foreground-500'
             />
           </div>
         </NavbarContent>
-        <div className="hidden md:flex items-center">
-          {isLoggedIn && (
+        <div className='hidden md:flex items-center'>
+          {isAuthenticated && (
             <Button
-              size="sm"
+              size='sm'
               onClick={() => navigateTo('/admin')}
-              className="mr-3"
+              className='mr-3'
             >
               Go to Admin
             </Button>
           )}
-          <ThemeSwitch className="hidden md:block" />
+          <ThemeSwitch className='hidden md:block' />
           <NavbarContent
-            className="hidden md:!flex md:!flex-col gap-0 max-w-fit"
-            justify="center"
+            className='hidden md:!flex md:!flex-col gap-0 max-w-fit'
+            justify='center'
           >
             {menuItems.map((item, index) => {
               const activeItem =
                 item.href === pathName || pathName.startsWith(item.href);
               if (item.href === '/') return null;
 
-              const loginOption = !isLoggedIn && item.title === 'Login';
-              const logoutOption = isLoggedIn && item.title === 'Logout';
+              const loginOption = !isAuthenticated && item.title === 'Login';
+              const logoutOption = isAuthenticated && item.title === 'Logout';
 
-              if (!isLoggedIn && item.title === 'Logout') {
+              if (!isAuthenticated && item.title === 'Logout') {
                 return null;
               }
-              if (isLoggedIn && item.title === 'Login') {
+              if (isAuthenticated && item.title === 'Login') {
                 return null;
               }
               return (
                 <NavbarItem
                   key={`${item}-${index}`}
-                  className="w-full text-right flex justify-end "
+                  className='w-full text-right flex justify-end '
                 >
                   <Typography
-                    variant="subtitle"
+                    variant='subtitle'
                     className={classNames(
                       'w-fit px-4 flex items-center cursor-pointer transition-all hover:line-through !text-xs',
                       activeItem
@@ -125,17 +128,17 @@ export default function TopNavbar() {
             })}
           </NavbarContent>
         </div>
-        <NavbarMenu className="lg:hidden">
+        <NavbarMenu className='lg:hidden'>
           {menuItems.map((item, index) => {
             const homeActive = pathName === '/' && item.title === 'Home';
             const products =
               pathName.startsWith('/products/') && item.title === 'Products';
             const activeItem = item.href === pathName || homeActive || products;
 
-            if (!isLoggedIn && item.title === 'Logout') {
+            if (!isAuthenticated && item.title === 'Logout') {
               return null;
             }
-            if (isLoggedIn && item.title === 'Login') {
+            if (isAuthenticated && item.title === 'Login') {
               return null;
             }
             return (

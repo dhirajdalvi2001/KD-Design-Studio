@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAxios } from '../../../../api/useAxios';
 import AdminBodyLayout from '../../../../components/Layout/AdminBodyLayout';
-import { Button, Input } from '@nextui-org/react';
+import { Button, Input, Switch } from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
 import { initialValue } from '../../../../utils/validations/user-validations';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import onError from '../../../../utils/onError';
 import { userFormSchema } from '../../../../utils/validations/user-validations';
+import Typography from '../../../../components/Typography/Typography';
 
 export default function NewUser() {
   const { userId } = useParams();
@@ -99,7 +100,10 @@ export default function NewUser() {
       isFormPage
       buttonDisabled={buttonDisabled}
     >
-      <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <Input
           label="User Name"
           placeholder="Enter User Name"
@@ -112,6 +116,101 @@ export default function NewUser() {
           errorMessage={errors.username?.message}
           {...register('username')}
         />
+        <Input
+          label="First Name"
+          placeholder="Enter First Name"
+          size="md"
+          labelPlacement="outside"
+          variant="bordered"
+          className="w-[350px]"
+          isDisabled={fieldsDisabled}
+          value={watch('first_name')}
+          errorMessage={errors.first_name?.message}
+          {...register('first_name')}
+        />
+        <Input
+          label="Middle Name"
+          placeholder="Enter Middle Name"
+          size="md"
+          labelPlacement="outside"
+          variant="bordered"
+          className="w-[350px]"
+          isDisabled={fieldsDisabled}
+          value={watch('middle_name')}
+          errorMessage={errors.middle_name?.message}
+          {...register('middle_name')}
+        />
+        <Input
+          label="Last Name"
+          placeholder="Enter Last Name"
+          size="md"
+          labelPlacement="outside"
+          variant="bordered"
+          className="w-[350px]"
+          isDisabled={fieldsDisabled}
+          value={watch('last_name')}
+          errorMessage={errors.last_name?.message}
+          {...register('last_name')}
+        />
+        <Input
+          label="Phone"
+          placeholder="Enter Phone"
+          size="md"
+          labelPlacement="outside"
+          variant="bordered"
+          className="w-[350px]"
+          isDisabled={fieldsDisabled}
+          value={watch('phone')}
+          errorMessage={errors.phone?.message}
+          {...register('phone')}
+        />
+        <Input
+          label="Secondary Phone"
+          placeholder="Enter Secondary Phone"
+          size="md"
+          labelPlacement="outside"
+          variant="bordered"
+          className="w-[350px]"
+          isDisabled={fieldsDisabled}
+          value={watch('secondary_phone')}
+          errorMessage={errors.secondary_phone?.message}
+          {...register('secondary_phone')}
+        />
+        <Input
+          label="Email"
+          placeholder="Enter Email"
+          size="md"
+          labelPlacement="outside"
+          variant="bordered"
+          className="w-[350px]"
+          isDisabled={fieldsDisabled}
+          value={watch('email')}
+          errorMessage={errors.email?.message}
+          {...register('email')}
+        />
+        <Input
+          label="Designation"
+          placeholder="Enter Designation"
+          size="md"
+          labelPlacement="outside"
+          variant="bordered"
+          className="w-[350px]"
+          isDisabled={fieldsDisabled}
+          value={watch('designation')}
+          errorMessage={errors.designation?.message}
+          {...register('designation')}
+        />
+        <div className="flex flex-col gap-3">
+          <Typography variant="span" className="text-white text-sm">
+            Is Superuser?
+          </Typography>
+          <Switch
+            size="sm"
+            isDisabled={fieldsDisabled}
+            isSelected={watch('is_active')}
+            onValueChange={(value) => setValue('is_active', value)}
+          />
+        </div>
         <div className="w-full h-[60px] flex items-center justify-start gap-3">
           <Button size="sm" variant="faded" onClick={() => navigate(-1)}>
             Cancel
