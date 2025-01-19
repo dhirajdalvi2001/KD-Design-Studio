@@ -16,6 +16,7 @@ import ThemeSwitch from '../Switch/ThemeSwitch';
 import { menuItems } from '../../utils/data';
 import Typography from '../Typography/Typography';
 import { useAxios } from '../../api/useAxios';
+import Cookies from 'js-cookie';
 
 export default function TopNavbar() {
   const location = useLocation();
@@ -24,9 +25,16 @@ export default function TopNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathName = location.pathname;
 
+  // Check login state from cookies (instead of isLoggedIn from API)
+  const isLoggedInFromCookies = Cookies.get('accessToken'); // Check if user is logged in based on the token
+
   function navigateTo(href) {
     if (href === 'logout') {
-      handleLogout();
+      // Logout logic
+      Cookies.remove('accessToken');
+      Cookies.remove('refreshToken');
+      localStorage.removeItem('user');
+      navigate('/auth/login'); // Redirect to login page after logout
       return;
     }
     navigate(href);
@@ -56,7 +64,7 @@ export default function TopNavbar() {
           </NavbarBrand>
 
           <div className="md:hidden flex items-center">
-            {isLoggedIn && (
+            {isLoggedInFromCookies && (
               <Button
                 size="sm"
                 onClick={() => navigateTo('/admin')}
@@ -72,8 +80,9 @@ export default function TopNavbar() {
             />
           </div>
         </NavbarContent>
+
         <div className="hidden md:flex items-center">
-          {isLoggedIn && (
+          {isLoggedInFromCookies && (
             <Button
               size="sm"
               onClick={() => navigateTo('/admin')}
@@ -92,15 +101,16 @@ export default function TopNavbar() {
                 item.href === pathName || pathName.startsWith(item.href);
               if (item.href === '/') return null;
 
-              const loginOption = !isLoggedIn && item.title === 'Login';
-              const logoutOption = isLoggedIn && item.title === 'Logout';
+              const loginOption = !isLoggedInFromCookies && item.title === 'Login';
+              const logoutOption = isLoggedInFromCookies && item.title === 'Logout';
 
-              if (!isLoggedIn && item.title === 'Logout') {
+              if (!isLoggedInFromCookies && item.title === 'Logout') {
                 return null;
               }
-              if (isLoggedIn && item.title === 'Login') {
+              if (isLoggedInFromCookies && item.title === 'Login') {
                 return null;
               }
+
               return (
                 <NavbarItem
                   key={`${item}-${index}`}
@@ -125,6 +135,7 @@ export default function TopNavbar() {
             })}
           </NavbarContent>
         </div>
+
         <NavbarMenu className="lg:hidden">
           {menuItems.map((item, index) => {
             const homeActive = pathName === '/' && item.title === 'Home';
@@ -132,12 +143,13 @@ export default function TopNavbar() {
               pathName.startsWith('/products/') && item.title === 'Products';
             const activeItem = item.href === pathName || homeActive || products;
 
-            if (!isLoggedIn && item.title === 'Logout') {
+            if (!isLoggedInFromCookies && item.title === 'Logout') {
               return null;
             }
-            if (isLoggedIn && item.title === 'Login') {
+            if (isLoggedInFromCookies && item.title === 'Login') {
               return null;
             }
+
             return (
               <NavbarMenuItem key={`${item}-${index}`}>
                 <div

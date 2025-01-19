@@ -8,6 +8,7 @@ import { useAxios } from '../../../../api/useAxios';
 import { useNavigate } from 'react-router-dom';
 import { themeAtom } from '../../../../utils/globalAtom';
 import { useSetAtom } from 'jotai';
+import Cookies from 'js-cookie';
 
 export default function Login() {
   const { axiosInstance } = useAxios();
@@ -29,10 +30,16 @@ export default function Login() {
     },
     onSuccess: (data) => {
       setTheme('dark');
-      const response = data.data;
-      localStorage.setItem('accessToken', response.access_token);
-      localStorage.setItem('refreshToken', response.refresh_token);
-      localStorage.setItem('user', JSON.stringify(response.user_data));
+
+      // Access tokens from response data
+      const accessToken = data.data.token.access_token;
+      const refreshToken = data.data.token.refresh_token;
+
+      // Store tokens in Cookies with 1-day expiry
+      Cookies.set('accessToken', accessToken, { expires: 1});
+      Cookies.set('refreshToken', refreshToken, { expires: 1 });
+      localStorage.setItem('user', JSON.stringify(data.data.user_data));
+
       toast.success('Login successful!');
       navigate('/');
     },
@@ -47,6 +54,7 @@ export default function Login() {
   function handleLogin(data) {
     loginUser(data);
   }
+
   return (
     <form
       className="h-[260px] flex flex-col justify-center items-center gap-4"
