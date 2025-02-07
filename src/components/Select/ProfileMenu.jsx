@@ -6,6 +6,7 @@ import {
   Button,
 } from '@nextui-org/react';
 import { useAxios } from '../../api/useAxios';
+import { useCookies } from 'react-cookie';
 
 export default function ProfileMenu() {
   const { handleLogout } = useAxios();
@@ -15,15 +16,15 @@ export default function ProfileMenu() {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Button variant="bordered" className="max-w-[200px] truncate">
+        <Button variant='bordered' className='max-w-[200px] truncate'>
           {user?.username}
         </Button>
       </DropdownTrigger>
-      <DropdownMenu aria-label="Static Actions">
+      <DropdownMenu aria-label='Static Actions'>
         <DropdownItem
-          key="delete"
-          className="hover:text-white"
-          color="danger"
+          key='delete'
+          className='hover:text-white'
+          color='danger'
           onClick={handleLogout}
         >
           Logout

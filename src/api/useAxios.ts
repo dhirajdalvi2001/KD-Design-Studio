@@ -1,28 +1,23 @@
-import { useAtom } from 'jotai';
 import { axiosInstance, customFetch } from './axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-import { authAtom } from '../utils/globalAtom';
 
 export const useAxios = () => {
   const navigate = useNavigate();
-  const [isAuthenticated, setIsAuthenticated] = useAtom(authAtom);
-  const accessToken = localStorage.getItem('accessToken');
-  const refreshToken = localStorage.getItem('refreshToken');
-  const stringUser = localStorage.getItem('user');
+  const [cookies, setCookies, removeCookies] = useCookies();
+  const accessToken = cookies['accessToken'];
+  const refreshToken = cookies['refreshToken'];
+  const stringUser = cookies['user'];
   const user = stringUser ? JSON.parse(stringUser) : null;
   const userId = user?.id;
-
-  // useEffect(() => {
-  //   setIsAuthenticated(!!accessToken);
-  // }, [accessToken]);
 
   // Add interceptor to handle token refresh
   useEffect(() => {
     const requestIntercept = axiosInstance.interceptors.request.use(
       (config) => {
         // Get the latest access token on each request
-        const token = localStorage.getItem('accessToken');
+        const token = cookies['accessToken'];
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
         }
@@ -45,20 +40,15 @@ export const useAxios = () => {
           originalRequest._retry = true;
 
           try {
-            const refreshToken = localStorage.getItem('refreshToken');
+            const refreshToken = cookies['refreshToken'];
             const response = await customFetch.post('/iam/login/refresh/', {
               refresh_token: refreshToken,
             });
 
             const newAccessToken = response?.data?.data?.access_token;
             const userInfo = response?.data?.data?.user_data;
-            console.log(
-              newAccessToken,
-              userInfo,
-              'newAccessToken, userInfo DD'
-            );
-            localStorage.setItem('accessToken', newAccessToken);
-            localStorage.setItem('user', JSON.stringify(userInfo));
+            cookies.set('accessToken', newAccessToken);
+            cookies.set('user', JSON.stringify(userInfo));
 
             // Update the Authorization header with new access token
             originalRequest.headers[
@@ -78,9 +68,9 @@ export const useAxios = () => {
           } catch (refreshError) {
             // Handle refresh token failure
             localStorage.setItem('redirectPath', window.location.pathname);
-            localStorage.removeItem('accessToken');
-            localStorage.removeItem('refreshToken');
-            localStorage.removeItem('user');
+            cookies.remove('accessToken');
+            cookies.remove('refreshToken');
+            cookies.remove('user');
             window.location.href = '/auth/login';
             return Promise.reject(refreshError.response.data);
           }
@@ -97,11 +87,11 @@ export const useAxios = () => {
   }, []);
 
   function handleLogout() {
-    setIsAuthenticated(false);
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
     localStorage.removeItem('user');
+    setCookies('accessToken', null);
+    setCookies('refreshToken', null);
     navigate('/');
+    console.log(cookies, 'cookies DD');
   }
 
   return {

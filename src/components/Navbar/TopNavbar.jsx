@@ -59,15 +59,13 @@ export default function TopNavbar() {
           </NavbarBrand>
 
           <div className='md:hidden flex items-center'>
-            {isAuthenticated && (
-              <Button
-                size='sm'
-                onClick={() => navigateTo('/admin')}
-                className='mr-3'
-              >
-                Go to Admin
-              </Button>
-            )}
+            {isAuthenticated && <Button
+              size='sm'
+              onClick={() => navigateTo('/admin')}
+              className='mr-3'
+            >
+              Go to Admin
+            </Button>}
             <ThemeSwitch />
             <NavbarMenuToggle
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
@@ -76,15 +74,13 @@ export default function TopNavbar() {
           </div>
         </NavbarContent>
         <div className='hidden md:flex items-center'>
-          {isAuthenticated && (
-            <Button
-              size='sm'
-              onClick={() => navigateTo('/admin')}
-              className='mr-3'
-            >
-              Go to Admin
-            </Button>
-          )}
+          {isAuthenticated && <Button
+            size='sm'
+            onClick={() => navigateTo('/admin')}
+            className='mr-3'
+          >
+            Go to Admin
+          </Button>}
           <ThemeSwitch className='hidden md:block' />
           <NavbarContent
             className='hidden md:!flex md:!flex-col gap-0 max-w-fit'

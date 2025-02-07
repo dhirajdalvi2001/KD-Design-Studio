@@ -1,28 +1,13 @@
 import classNames from 'classnames';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import logo from '../../assets/logo-without-text.png';
 import Typography from '../Typography/Typography';
-import { useEffect } from 'react';
-import { authAtom } from '../../utils/globalAtom';
-import { useAtomValue } from 'jotai';
 
 export default function AuthLayout() {
-  const navigate = useNavigate();
   const year = new Date().getFullYear();
   const copyrightText = `@${year} KD Studio`;
-  const isAuthenticated = useAtomValue(authAtom);
 
-  // useEffect(() => {
-  //   console.log(isAuthenticated, 'isAuthenticated DD');
-  //   if (isAuthenticated) {
-  //     console.log('isAuthenticated DD');
-  //     navigate(-1);
-  //   }
-  // }, []);
-
-  // if (isAuthenticated) {
-  //   return null;
-  // }
+  // IF LOGGED IN THEN REDIRECT TO HOME PAGE
 
   return (
     <div

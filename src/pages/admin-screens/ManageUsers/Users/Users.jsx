@@ -17,10 +17,11 @@ export default function Users() {
     { label: 'Actions', className: 'w-[60px]' },
   ];
 
-  // All Roles
-  const { data: users, isLoading } = useQuery({
+  // All Users
+  const { data: usersData, isLoading } = useQuery({
     queryKey: ['getAllUsers'],
     queryFn: async () => {
+
       const response = await axiosInstance.get('/iam/user/');
       return response.data;
     },
@@ -57,7 +58,9 @@ export default function Users() {
     },
   });
 
-  const usersTableBody = users?.data?.users?.map((user, index) => [
+  console.log(usersData, 'users DD');
+
+  const usersTableBody = usersData?.data?.map((user, index) => [
     index + 1,
     user.username,
     user.full_name,
@@ -74,9 +77,9 @@ export default function Users() {
 
   return (
     <AdminBodyLayout
-      title="Users"
-      addNewButton="Add New User"
-      addNewHRef="/admin/manage-users/users/new"
+      title='Users'
+      addNewButton='Add New User'
+      addNewHRef='/admin/manage-users/users/new'
     >
       <Table
         headers={usersTableHeaders}

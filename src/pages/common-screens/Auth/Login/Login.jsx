@@ -8,12 +8,15 @@ import { useAxios } from '../../../../api/useAxios';
 import { useNavigate } from 'react-router-dom';
 import { authAtom, themeAtom } from '../../../../utils/globalAtom';
 import { useSetAtom } from 'jotai';
+import { useCookies } from 'react-cookie';
 
 export default function Login() {
   const { axiosInstance } = useAxios();
   const navigate = useNavigate();
   const setTheme = useSetAtom(themeAtom);
   const setIsAuthenticated = useSetAtom(authAtom);
+  const [cookies, setCookies] = useCookies();
+
   const {
     register,
     handleSubmit,
@@ -29,12 +32,11 @@ export default function Login() {
       return response.data;
     },
     onSuccess: (data) => {
-      setIsAuthenticated(true);
       setTheme('dark');
+      setIsAuthenticated(true);
       const response = data.data;
-      console.log(data, response, 'data DD');
-      localStorage.setItem('accessToken', response.token.access_token);
-      localStorage.setItem('refreshToken', response.token.refresh_token);
+      setCookies('accessToken', response.token.access_token);
+      setCookies('refreshToken', response.token.refresh_token);
       localStorage.setItem('user', JSON.stringify(response.user_data));
       toast.success('Login successful!');
       navigate('/');
