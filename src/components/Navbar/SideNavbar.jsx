@@ -9,55 +9,59 @@ export default function SideNavbar() {
   const { handleLogout } = useAxios();
 
   return (
-    <div className="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-background shadow-lg">
-      <nav className="flex flex-col h-full">
-        <div className="flex-1 text-xs md:text-sm">
+    <div className='fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-background shadow-lg'>
+      <nav className='flex flex-col h-full'>
+        <div className='flex-1 !text-[11px] md:!text-[13px]'>
           <Link
-            to="/admin"
-            className="flex items-center gap-3 px-6 py-3 hover:bg-foreground-200 text-foreground-900 transition-all"
+            to='/admin'
+            className='flex items-center gap-3 px-6 py-3 hover:bg-foreground-200 text-foreground-900 transition-all'
           >
-            <RxDashboard className="text-lg" />
+            <RxDashboard className='text-lg' />
             <span>Dashboard</span>
           </Link>
 
           <Link
-            to="/admin/products"
-            className="flex items-center gap-3 px-6 py-3 hover:bg-foreground-200 text-foreground-900 transition-all"
+            to='/admin/products'
+            className='flex items-center gap-3 px-6 py-3 hover:bg-foreground-200 text-foreground-900 transition-all'
           >
-            <BsBox className="text-lg" />
+            <BsBox className='text-lg' />
             <span>Products</span>
           </Link>
 
           <Link
-            to="/admin/manage-tags"
-            className="flex items-center gap-3 px-6 py-3 hover:bg-foreground-200 text-foreground-900 transition-all"
+            to='/admin/manage-tags'
+            className='flex items-center gap-3 px-6 py-3 hover:bg-foreground-200 text-foreground-900 transition-all'
           >
-            <BsTags className="text-lg" />
+            <BsTags className='text-lg' />
             <span>Manage Tags</span>
           </Link>
 
-          <Accordion isCompact fullWidth className="!text-xs md:!text-sm">
+          <Accordion
+            isCompact
+            fullWidth
+            className='!text-[11px] md:!text-[13px]'
+          >
             <AccordionItem
-              key="manage-users"
-              aria-label="Manage Users"
+              key='manage-users'
+              aria-label='Manage Users'
               title={
-                <div className="flex items-center gap-3 text-xs md:text-sm">
-                  <BsPeople className="text-lg" />
+                <div className='flex items-center gap-3 !text-[11px] md:!text-[13px]'>
+                  <BsPeople className='text-lg' />
                   <span>Manage Users</span>
                 </div>
               }
-              className="px-3 py-1 text-xs md:text-sm text-foreground-900 transition-all"
+              className='px-3 py-1 text-xs md:text-sm text-foreground-900 transition-all'
             >
-              <div className="flex flex-col pl-4">
+              <div className='flex flex-col pl-4'>
                 <Link
-                  to="/admin/manage-users/users"
-                  className="flex items-center gap-3 px-6 py-2 hover:bg-foreground-200 text-foreground-900 transition-all"
+                  to='/admin/manage-users/users'
+                  className='flex items-center gap-3 px-6 py-2 hover:bg-foreground-200 text-foreground-900 transition-all'
                 >
                   <span>Users</span>
                 </Link>
                 <Link
-                  to="/admin/manage-users/roles"
-                  className="flex items-center gap-3 px-6 py-2 hover:bg-foreground-200 text-foreground-900 transition-all"
+                  to='/admin/manage-users/roles'
+                  className='flex items-center gap-3 px-6 py-2 hover:bg-foreground-200 text-foreground-900 transition-all'
                 >
                   <span>Roles</span>
                 </Link>
@@ -68,9 +72,9 @@ export default function SideNavbar() {
 
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 px-6 py-3 hover:bg-danger-500 text-foreground-900 hover:text-foreground-100 border-t transition-all duration-150"
+          className='flex items-center gap-3 px-6 py-3 hover:bg-danger-500 text-[10px] md:text-xs text-foreground-900 hover:text-foreground-100 border-t transition-all duration-150'
         >
-          <FiLogOut className="text-lg" />
+          <FiLogOut className='text-lg' />
           <span>Logout</span>
         </button>
       </nav>
