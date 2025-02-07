@@ -1,15 +1,22 @@
 import { Button, Input } from '@nextui-org/react';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import { loginFormSchema } from '../../../utils/validations/login-validations';
+import { loginFormSchema } from '../../../../utils/validations/login-validations';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useAxios } from '../../../api/useAxios';
+import { useAxios } from '../../../../api/useAxios';
 import { useNavigate } from 'react-router-dom';
+import { authAtom, themeAtom } from '../../../../utils/globalAtom';
+import { useSetAtom } from 'jotai';
+import { useCookies } from 'react-cookie';
 
 export default function Login() {
   const { axiosInstance } = useAxios();
   const navigate = useNavigate();
+  const setTheme = useSetAtom(themeAtom);
+  const setIsAuthenticated = useSetAtom(authAtom);
+  const [cookies, setCookies] = useCookies();
+
   const {
     register,
     handleSubmit,
@@ -25,9 +32,11 @@ export default function Login() {
       return response.data;
     },
     onSuccess: (data) => {
+      setTheme('dark');
+      setIsAuthenticated(true);
       const response = data.data;
-      localStorage.setItem('accessToken', response.access_token);
-      localStorage.setItem('refreshToken', response.refresh_token);
+      setCookies('accessToken', response.token.access_token);
+      setCookies('refreshToken', response.token.refresh_token);
       localStorage.setItem('user', JSON.stringify(response.user_data));
       toast.success('Login successful!');
       navigate('/');
@@ -45,33 +54,34 @@ export default function Login() {
   }
   return (
     <form
-      className="h-[260px] flex flex-col justify-center items-center gap-4"
+      className='h-[260px] flex flex-col justify-center items-center gap-4'
       onSubmit={handleSubmit(handleLogin)}
     >
       <Input
-        label="Username"
-        size="sm"
-        variant="underlined"
-        placeholder="Enter your username"
+        label='Username'
+        size='sm'
+        variant='underlined'
+        placeholder='Enter your username'
         disabled={isPending}
         {...register('username')}
-        errorMessage={errors.username?.message}
+        errorMessage={errors?.username?.message}
         required
       />
       <Input
-        label="Password"
-        size="sm"
-        variant="underlined"
-        placeholder="Enter your password"
+        label='Password'
+        size='sm'
+        variant='underlined'
+        placeholder='Enter your password'
         disabled={isPending}
+        type='password'
         {...register('password')}
         errorMessage={errors.password?.message}
         required
       />
       <Button
-        type="submit"
-        variant="solid"
-        className="mt-4 h-8 rounded-none"
+        type='submit'
+        variant='solid'
+        className='mt-4 h-8 rounded-none'
         disabled={isPending}
         isLoading={isPending}
       >

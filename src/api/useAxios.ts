@@ -1,22 +1,23 @@
-import { axiosInstance } from './axios';
-import { useEffect, useState } from 'react';
+import { axiosInstance, customFetch } from './axios';
+import { useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 
 export const useAxios = () => {
   const navigate = useNavigate();
-  const accessToken = localStorage.getItem('accessToken');
-  const refreshToken = localStorage.getItem('refreshToken');
-  const [isLoggedIn, setIsLoggedIn] = useState(!!accessToken);
-
-  useEffect(() => {
-    setIsLoggedIn(!!accessToken);
-  }, [accessToken]);
+  const [cookies, setCookies, removeCookies] = useCookies();
+  const accessToken = cookies['accessToken'];
+  const refreshToken = cookies['refreshToken'];
+  const stringUser = cookies['user'];
+  const user = stringUser ? JSON.parse(stringUser) : null;
+  const userId = user?.id;
 
   // Add interceptor to handle token refresh
   useEffect(() => {
     const requestIntercept = axiosInstance.interceptors.request.use(
       (config) => {
-        const token = localStorage.getItem('accessToken');
+        // Get the latest access token on each request
+        const token = cookies['accessToken'];
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
         }
@@ -39,25 +40,41 @@ export const useAxios = () => {
           originalRequest._retry = true;
 
           try {
-            const refreshToken = localStorage.getItem('refreshToken');
-            const response = await axiosInstance.post('/iam/login/refresh/', {
-              refreshToken,
+            const refreshToken = cookies['refreshToken'];
+            const response = await customFetch.post('/iam/login/refresh/', {
+              refresh_token: refreshToken,
             });
 
-            const { accessToken } = response.data;
-            localStorage.setItem('accessToken', accessToken);
+            const newAccessToken = response?.data?.data?.access_token;
+            const userInfo = response?.data?.data?.user_data;
+            cookies.set('accessToken', newAccessToken);
+            cookies.set('user', JSON.stringify(userInfo));
 
-            originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+            // Update the Authorization header with new access token
+            originalRequest.headers[
+              'Authorization'
+            ] = `Bearer ${newAccessToken}`;
+            // Update axiosInstance default headers
+            axiosInstance.defaults.headers.common[
+              'Authorization'
+            ] = `Bearer ${newAccessToken}`;
+
+            // Ensure the Authorization header is added to the request
+            originalRequest.headers[
+              'Authorization'
+            ] = `Bearer ${newAccessToken}`;
+
             return axiosInstance(originalRequest);
           } catch (refreshError) {
-            // Handle refresh token failure (e.g., logout user)
-            localStorage.removeItem('accessToken');
-            localStorage.removeItem('refreshToken');
-            localStorage.removeItem('user');
+            // Handle refresh token failure
+            localStorage.setItem('redirectPath', window.location.pathname);
+            cookies.remove('accessToken');
+            cookies.remove('refreshToken');
+            cookies.remove('user');
+            window.location.href = '/auth/login';
             return Promise.reject(refreshError.response.data);
           }
         }
-
         return Promise.reject(error);
       }
     );
@@ -70,10 +87,19 @@ export const useAxios = () => {
   }, []);
 
   function handleLogout() {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    navigate('/auth/login');
+    localStorage.removeItem('user');
+    setCookies('accessToken', null);
+    setCookies('refreshToken', null);
+    navigate('/');
+    console.log(cookies, 'cookies DD');
   }
 
-  return { axiosInstance, handleLogout, accessToken, refreshToken, isLoggedIn };
+  return {
+    axiosInstance,
+    handleLogout,
+    accessToken,
+    refreshToken,
+    user,
+    userId,
+  };
 };

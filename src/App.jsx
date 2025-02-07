@@ -1,18 +1,29 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import FallbackLoader from './components/Loader/FallbackLoader';
-import RootLayout from './components/Layout/RootLayout';
-import { Suspense, lazy } from 'react';
 import './App.css';
-// import Login from './pages/Auth/Login/Login';
-// import AuthLayout from './components/Layout/AuthLayout';
+import { Suspense } from 'react';
+import FallbackLoader from './components/Loader/FallbackLoader';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import RootLayout from './components/Layout/RootLayout';
+import AuthLayout from './components/Layout/AuthLayout';
+import AdminLayout from './components/Layout/AdminLayout';
 
-const Home = lazy(() => import('./pages/Home/Home'));
-const Products = lazy(() => import('./pages/Products/Products'));
-const SingleProduct = lazy(() => import('./pages/Products/SingleProduct'));
-const About = lazy(() => import('./pages/About/About'));
-const Contact = lazy(() => import('./pages/Contact/Contact'));
-const Error404Page = lazy(() => import('./pages/Error404Page/Error404Page'));
+// Customer Screens
+import Home from './pages/customer-screens/Home/Home';
+import Products from './pages/customer-screens/Products/Products';
+import SingleProduct from './pages/customer-screens/Products/SingleProduct';
+import About from './pages/customer-screens/About/About';
+import Contact from './pages/customer-screens/Contact/Contact';
+
+// Common Screens
+import Error404Page from './pages/common-screens/Error404Page/Error404Page';
+import Login from './pages/common-screens/Auth/Login/Login';
+
+// Admin Screens
+import Dashboard from './pages/admin-screens/Dashboard/Dashboard';
+import Roles from './pages/admin-screens/ManageUsers/Roles/Roles';
+import NewRole from './pages/admin-screens/ManageUsers/Roles/NewRole';
+import Users from './pages/admin-screens/ManageUsers/Users/Users';
+import NewUser from './pages/admin-screens/ManageUsers/Users/NewUser';
 
 const router = createBrowserRouter([
   {
@@ -67,17 +78,52 @@ const router = createBrowserRouter([
       },
     ],
   },
-  // {
-  //   path: '/auth',
-  //   element: <AuthLayout />,
-  //   errorElement: <Error404Page />,
-  //   children: [
-  //     {
-  //       path: '/auth/login',
-  //       element: <Login />,
-  //     },
-  //   ],
-  // },
+  {
+    path: '/auth',
+    element: <AuthLayout />,
+    errorElement: <Error404Page />,
+    children: [
+      {
+        path: '/auth/login',
+        element: <Login />,
+      },
+    ],
+  },
+  {
+    path: '/admin',
+    element: <AdminLayout />,
+    errorElement: <Error404Page />,
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
+      },
+      {
+        path: '/admin/manage-users/roles',
+        element: <Roles />,
+      },
+      {
+        path: '/admin/manage-users/roles/new',
+        element: <NewRole />,
+      },
+      {
+        path: '/admin/manage-users/roles/:roleId',
+        element: <NewRole />,
+      },
+      {
+        path: '/admin/manage-users/users',
+        element: <Users />,
+      },
+      {
+        path: '/admin/manage-users/users/new',
+        element: <NewUser />,
+      },
+      {
+        path: '/admin/manage-users/users/:userId',
+        element: <NewUser />,
+      },
+    ],
+  },
 ]);
 const queryClient = new QueryClient();
 
