@@ -42,9 +42,9 @@ export default function Login() {
       navigate('/');
     },
     onError: (error) => {
-      const errors = error.response.data.errors;
+      const errors = error.response.data.data.non_field_errors;
       errors.forEach((error) => {
-        setError('password', { message: error?.detail });
+        setError('password', { message: error });
       });
     },
   });

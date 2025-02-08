@@ -72,9 +72,10 @@ export const useAxios = () => {
             cookies.remove('refreshToken');
             cookies.remove('user');
             window.location.href = '/auth/login';
-            return Promise.reject(refreshError.response.data);
+            return Promise.reject(refreshError);
           }
         }
+
         return Promise.reject(error);
       }
     );

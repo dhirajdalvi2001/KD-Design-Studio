@@ -39,7 +39,6 @@ export default function Users() {
       return response.data;
     },
     onSuccess: () => {
-      toast.success('User status updated successfully!');
       queryClient.invalidateQueries({ queryKey: ['getAllUsers'] });
     },
   });
@@ -51,7 +50,6 @@ export default function Users() {
       return response.data;
     },
     onSuccess: () => {
-      toast.success('User deleted successfully!');
       queryClient.invalidateQueries({ queryKey: ['getAllUsers'] });
     },
   });

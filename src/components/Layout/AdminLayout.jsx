@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import { Outlet, useNavigate } from 'react-router-dom';
 import SideNavbar from '../Navbar/SideNavbar';
 import { useEffect } from 'react';
-import { toast } from 'react-toastify';
 
 export default function AdminLayout() {
   const navigate = useNavigate();
@@ -14,7 +13,6 @@ export default function AdminLayout() {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      toast.error('Please login to continue');
       navigate('/auth/login');
     }
 
