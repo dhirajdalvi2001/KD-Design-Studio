@@ -6,7 +6,6 @@ import {
   Button,
 } from '@nextui-org/react';
 import { useAxios } from '../../api/useAxios';
-import { useCookies } from 'react-cookie';
 
 export default function ProfileMenu() {
   const { handleLogout } = useAxios();

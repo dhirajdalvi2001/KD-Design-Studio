@@ -17,7 +17,8 @@ export default function AdminLayout() {
       toast.error('Please login to continue');
       navigate('/auth/login');
     }
-  });
+
+  }, [isAuthenticated, navigate]);
 
   return (
     <div className={classNames(theme, 'min-h-screen min-w-screen')}>

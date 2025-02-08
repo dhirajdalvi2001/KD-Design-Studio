@@ -59,12 +59,6 @@ export default function SideNavbar() {
                 >
                   <span>Users</span>
                 </Link>
-                <Link
-                  to='/admin/manage-users/roles'
-                  className='flex items-center gap-3 px-6 py-2 hover:bg-foreground-200 text-foreground-900 transition-all'
-                >
-                  <span>Roles</span>
-                </Link>
               </div>
             </AccordionItem>
           </Accordion>

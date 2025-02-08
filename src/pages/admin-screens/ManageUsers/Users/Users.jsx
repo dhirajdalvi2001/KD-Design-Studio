@@ -13,6 +13,8 @@ export default function Users() {
     { label: 'Sr. No.', className: 'w-[100px]' },
     { label: 'Username', className: 'w-[100px]' },
     { label: 'Full Name', className: 'w-full' },
+    { label: 'Email', className: 'w-full' },
+    { label: 'Is Superuser', className: 'w-full' },
     { label: 'Status', className: 'min-w-[100px]' },
     { label: 'Actions', className: 'w-[60px]' },
   ];
@@ -21,7 +23,6 @@ export default function Users() {
   const { data: usersData, isLoading } = useQuery({
     queryKey: ['getAllUsers'],
     queryFn: async () => {
-
       const response = await axiosInstance.get('/iam/user/');
       return response.data;
     },
@@ -32,12 +33,9 @@ export default function Users() {
   // Change Status
   const { mutate: changeStatus, isLoading: changeStatusLoading } = useMutation({
     mutationFn: async ({ userId, value }) => {
-      const response = await axiosInstance.post(
-        `/iam/user/${userId}/active-status/`,
-        {
-          is_active: value,
-        }
-      );
+      const response = await axiosInstance.patch(`/iam/user/${userId}/`, {
+        is_active: value,
+      });
       return response.data;
     },
     onSuccess: () => {
@@ -63,7 +61,9 @@ export default function Users() {
   const usersTableBody = usersData?.data?.map((user, index) => [
     index + 1,
     user.username,
-    user.full_name,
+    user.first_name + ' ' + user.last_name,
+    user.email,
+    user.is_superuser ? 'Superadmin' : 'Normal User',
     <Badge key={user.id}>{user.is_active ? 'Active' : 'Inactive'}</Badge>,
     <UserActions
       key={user.id}

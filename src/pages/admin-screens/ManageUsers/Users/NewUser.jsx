@@ -34,7 +34,7 @@ export default function NewUser() {
     queryKey: ['userDetails'],
     queryFn: async () => {
       const response = await axiosInstance.get(`/iam/user/${userId}`);
-      return response.data.data.user;
+      return response.data;
     },
     enabled: !!userId,
     refetchOnMount: true,
@@ -58,7 +58,7 @@ export default function NewUser() {
   // Update User
   const { mutate: updateUser, isLoading: updateUserLoading } = useMutation({
     mutationFn: async (data) => {
-      const response = await axiosInstance.put(`/iam/user/${userId}`, data);
+      const response = await axiosInstance.patch(`/iam/user/${userId}`, data);
       return response.data;
     },
     onSuccess: () => {
@@ -72,10 +72,13 @@ export default function NewUser() {
 
   useEffect(() => {
     if (userDetails) {
-      setValue('username', userDetails.username);
-      setValue('email', userDetails.email);
-      setValue('role', userDetails.role);
+      setValue('username', userDetails.data.username);
+      setValue('first_name', userDetails.data.first_name);
+      setValue('last_name', userDetails.data.last_name);
+      setValue('email', userDetails.data.email);
+      setValue('is_superuser', userDetails.data.is_superuser);
     }
+
     if (!userId) {
       reset({ ...initialValue });
     }
@@ -85,142 +88,111 @@ export default function NewUser() {
     if (userId) {
       updateUser(data);
     } else {
+      if (!data.password) {
+        setError('password', { message: 'Password is required' });
+        return;
+      }
       createUser(data);
     }
   }
-
-  console.log(userDetails, 'userDetails DD');
 
   const fieldsDisabled = userDetailsLoading;
   const buttonDisabled = createUserLoading || updateUserLoading;
 
   return (
     <AdminBodyLayout
-      title="New User"
+      title='New User'
       isFormPage
       buttonDisabled={buttonDisabled}
     >
       <form
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
+        className='flex flex-wrap gap-3 w-full md:w-[760px] text-foreground-900'
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input
-          label="User Name"
-          placeholder="Enter User Name"
-          size="md"
-          labelPlacement="outside"
-          variant="bordered"
-          className="w-[350px]"
-          isDisabled={fieldsDisabled}
-          value={watch('username')}
-          errorMessage={errors.username?.message}
-          {...register('username')}
-        />
-        <Input
-          label="First Name"
-          placeholder="Enter First Name"
-          size="md"
-          labelPlacement="outside"
-          variant="bordered"
-          className="w-[350px]"
+          label='First Name'
+          placeholder='Enter First Name'
+          size='md'
+          labelPlacement='outside'
+          variant='bordered'
+          className='w-[350px]'
           isDisabled={fieldsDisabled}
           value={watch('first_name')}
           errorMessage={errors.first_name?.message}
           {...register('first_name')}
         />
         <Input
-          label="Middle Name"
-          placeholder="Enter Middle Name"
-          size="md"
-          labelPlacement="outside"
-          variant="bordered"
-          className="w-[350px]"
-          isDisabled={fieldsDisabled}
-          value={watch('middle_name')}
-          errorMessage={errors.middle_name?.message}
-          {...register('middle_name')}
-        />
-        <Input
-          label="Last Name"
-          placeholder="Enter Last Name"
-          size="md"
-          labelPlacement="outside"
-          variant="bordered"
-          className="w-[350px]"
+          label='Last Name'
+          placeholder='Enter Last Name'
+          size='md'
+          labelPlacement='outside'
+          variant='bordered'
+          className='w-[350px]'
           isDisabled={fieldsDisabled}
           value={watch('last_name')}
           errorMessage={errors.last_name?.message}
           {...register('last_name')}
         />
         <Input
-          label="Phone"
-          placeholder="Enter Phone"
-          size="md"
-          labelPlacement="outside"
-          variant="bordered"
-          className="w-[350px]"
+          label='User Name'
+          placeholder='Enter User Name'
+          size='md'
+          labelPlacement='outside'
+          variant='bordered'
+          className='w-[350px]'
           isDisabled={fieldsDisabled}
-          value={watch('phone')}
-          errorMessage={errors.phone?.message}
-          {...register('phone')}
+          value={watch('username')}
+          errorMessage={errors.username?.message}
+          {...register('username')}
         />
         <Input
-          label="Secondary Phone"
-          placeholder="Enter Secondary Phone"
-          size="md"
-          labelPlacement="outside"
-          variant="bordered"
-          className="w-[350px]"
-          isDisabled={fieldsDisabled}
-          value={watch('secondary_phone')}
-          errorMessage={errors.secondary_phone?.message}
-          {...register('secondary_phone')}
-        />
-        <Input
-          label="Email"
-          placeholder="Enter Email"
-          size="md"
-          labelPlacement="outside"
-          variant="bordered"
-          className="w-[350px]"
+          label='Email'
+          placeholder='Enter Email'
+          size='md'
+          labelPlacement='outside'
+          variant='bordered'
+          className='w-[350px]'
           isDisabled={fieldsDisabled}
           value={watch('email')}
           errorMessage={errors.email?.message}
           {...register('email')}
         />
-        <Input
-          label="Designation"
-          placeholder="Enter Designation"
-          size="md"
-          labelPlacement="outside"
-          variant="bordered"
-          className="w-[350px]"
-          isDisabled={fieldsDisabled}
-          value={watch('designation')}
-          errorMessage={errors.designation?.message}
-          {...register('designation')}
-        />
-        <div className="flex flex-col gap-3">
-          <Typography variant="span" className="text-white text-sm">
+        {!userId && (
+          <Input
+            label='Password'
+            placeholder='Enter Password'
+            size='md'
+            labelPlacement='outside'
+            variant='bordered'
+            className='w-[350px]'
+            isDisabled={fieldsDisabled}
+            value={watch('password')}
+            errorMessage={errors.password?.message}
+            {...register('password')}
+          />
+        )}
+
+        <div className='flex flex-col gap-3'>
+          <Typography variant='span' className='text-white text-sm'>
             Is Superuser?
           </Typography>
           <Switch
-            size="sm"
+            size='sm'
             isDisabled={fieldsDisabled}
-            isSelected={watch('is_active')}
-            onValueChange={(value) => setValue('is_active', value)}
+            isSelected={watch('is_superuser')}
+            onValueChange={(value) => setValue('is_superuser', value)}
           />
         </div>
-        <div className="w-full h-[60px] flex items-center justify-start gap-3">
-          <Button size="sm" variant="faded" onClick={() => navigate(-1)}>
+        <div className='w-full h-[60px] flex items-center justify-start gap-3'>
+          <Button size='sm' variant='faded' onClick={() => navigate(-1)}>
             Cancel
           </Button>
           <Button
-            size="sm"
-            variant="solid"
-            type="submit"
+            size='sm'
+            variant='solid'
+            type='submit'
             isDisabled={buttonDisabled}
-            className="bg-primary-500 text-white"
+            className='bg-primary-500 text-white'
           >
             Save
           </Button>

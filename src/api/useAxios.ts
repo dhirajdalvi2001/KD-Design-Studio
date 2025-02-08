@@ -91,7 +91,6 @@ export const useAxios = () => {
     setCookies('accessToken', null);
     setCookies('refreshToken', null);
     navigate('/');
-    console.log(cookies, 'cookies DD');
   }
 
   return {
