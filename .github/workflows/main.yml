@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  deploy:
+  main:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -19,6 +19,6 @@ jobs:
           EC2_KEY: ${{ secrets.EC2_KEY }}
         run: |
           mkdir -p ~/.ssh
-          echo "$EC2_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+          echo "$EC2_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST "bash ~/entrypoint.sh"
