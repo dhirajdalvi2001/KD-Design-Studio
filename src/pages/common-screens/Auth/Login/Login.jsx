@@ -38,7 +38,6 @@ export default function Login() {
           setCookies(k, val);
         });
       });
-      toast.success("Login successful!");
       if (isSuperAdmin) {
         navigate("/admin");
       } else navigate("/");

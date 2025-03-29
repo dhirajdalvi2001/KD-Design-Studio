@@ -77,23 +77,21 @@ export default function SingleProduct() {
                       </Link>
                     </Typography>
                   )}
-                  <div className="flex items-center gap-3">
-                    <div className="flex items-center gap-1">
-                      <Typography variant="p" className="text-xs">
-                        Total Likes:{" "}
-                      </Typography>
-                      <Typography variant="p" className="min-w-5">
-                        {product?.likes}
-                      </Typography>
-                    </div>
+                  <div className="flex items-center gap-1">
                     <Button
-                      className="!p-0 !min-w-8 !w-8 !h-8"
+                      className="!p-0 !min-w-14 !w-14 !h-8"
                       onClick={() => {
                         if (!isAuthenticated) return;
                         likeDislikeProduct({ id: product?.id });
                       }}
                       disabled={!isAuthenticated}
                     >
+                      <Typography
+                        variant="p"
+                        className="text-right text-[13px]"
+                      >
+                        {product?.likes}
+                      </Typography>
                       <FaThumbsUp
                         className={classNames(
                           product?.is_liked
@@ -115,16 +113,20 @@ export default function SingleProduct() {
               </div>
             </div>
             <div className="flex flex-col gap-4 text-justify">
-              {["introduction", "concept_overview"]?.map((key) => (
-                <div key={key} className="flex flex-col gap-1">
-                  <Typography variant="p">
-                    <span className="font-medium">
-                      {key ? toTitleCase(key) : ""}
-                    </span>
-                  </Typography>
-                  <Typography variant="caption">{product?.[key]}</Typography>
-                </div>
-              ))}
+              {["introduction", "concept_overview"]?.map((key) => {
+                if (product?.[key] === null || product?.[key] === "")
+                  return null;
+                return (
+                  <div key={key} className="flex flex-col gap-1">
+                    <Typography variant="p">
+                      <span className="font-medium">
+                        {key ? toTitleCase(key) : ""}
+                      </span>
+                    </Typography>
+                    <Typography variant="caption">{product?.[key]}</Typography>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

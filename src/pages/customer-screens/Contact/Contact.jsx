@@ -1,18 +1,18 @@
-import BodyLayout from '../../../components/Layout/BodyLayout';
-import { Button, Input, Textarea } from '@nextui-org/react';
-import { Controller, useForm } from 'react-hook-form';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import Typography from '../../../components/Typography/Typography';
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import { useState } from 'react';
-import { contactImg } from '../../../utils/data';
+import BodyLayout from "../../../components/Layout/BodyLayout";
+import { Button, Input, Textarea } from "@nextui-org/react";
+import { Controller, useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import Typography from "../../../components/Typography/Typography";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useState } from "react";
+import { contactImg } from "../../../utils/data";
 
 const contactFormSchema = yup.object().shape({
-  name: yup.string().required('Name is required').trim(),
-  email: yup.string().email().required('Email is required'),
-  message: yup.string().required('Message is required').trim(),
+  name: yup.string().required("Name is required").trim(),
+  email: yup.string().email().required("Email is required"),
+  message: yup.string().required("Message is required").trim(),
 });
 
 const Contact = () => {
@@ -24,10 +24,10 @@ const Contact = () => {
     handleSubmit,
   } = useForm({
     defaultValues: {
-      name: '',
-      email: '',
-      subject: '',
-      message: '',
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
     },
     resolver: yupResolver(contactFormSchema),
   });
@@ -37,7 +37,6 @@ const Contact = () => {
     const result = await axios.post(import.meta.env.VITE_FORMSPREE_LINK, data);
     if (result.status === 200) {
       reset();
-      toast.success('Message sent!');
     }
     setLoading(false);
   };

@@ -62,7 +62,6 @@ export default function NewProduct() {
         return response.data;
       },
       onSuccess: () => {
-        toast.success("Product created successfully!");
         navigate("/admin/manage-products");
       },
       onError: (error) => {
@@ -81,7 +80,6 @@ export default function NewProduct() {
         return response.data;
       },
       onSuccess: () => {
-        toast.success("Product updated successfully!");
         navigate("/admin/manage-products");
       },
       onError: (error) => {
@@ -122,9 +120,6 @@ export default function NewProduct() {
       }
 
       return response.data;
-    },
-    onSuccess: () => {
-      toast.success("Document uploaded successfully!");
     },
     onError: (error) => {
       onError(error, setError);
