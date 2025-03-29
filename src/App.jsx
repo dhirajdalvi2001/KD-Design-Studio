@@ -22,6 +22,9 @@ import Login from './pages/common-screens/Auth/Login/Login';
 import Dashboard from './pages/admin-screens/Dashboard/Dashboard';
 import Users from './pages/admin-screens/ManageUsers/Users/Users';
 import NewUser from './pages/admin-screens/ManageUsers/Users/NewUser';
+import SignUp from './pages/common-screens/Auth/SignUp/SignUp';
+import ManageProducts from './pages/admin-screens/ManageProducts/ManageProducts';
+import NewProduct from './pages/admin-screens/ManageProducts/NewProduct';
 
 const router = createBrowserRouter([
   {
@@ -85,6 +88,10 @@ const router = createBrowserRouter([
         path: '/auth/login',
         element: <Login />,
       },
+      {
+        path: '/auth/sign-up',
+        element: <SignUp />
+      }
     ],
   },
   {
@@ -97,16 +104,28 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: '/admin/manage-users/users',
+        path: 'manage-users/users',
         element: <Users />,
       },
       {
-        path: '/admin/manage-users/users/new',
+        path: 'manage-users/users/new',
         element: <NewUser />,
       },
       {
-        path: '/admin/manage-users/users/:userId',
-        element: <NewUser />,
+        path: 'manage-users/users/:userId',
+        element: <NewUser />, 
+      },
+      {
+        path: 'manage-products',
+        element: <ManageProducts />,
+      },
+      {
+        path: 'manage-products/new',
+        element: <NewProduct />,
+      },
+      {
+        path: 'manage-products/:productId',
+        element: <NewProduct />, 
       },
     ],
   },

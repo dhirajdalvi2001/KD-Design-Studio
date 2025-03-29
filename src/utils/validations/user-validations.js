@@ -7,7 +7,6 @@ export const initialValue = {
   first_name: '',
   last_name: '',
   is_superuser: false,
-  is_active: true,
 };
 
 export const userFormSchema = yup.object().shape({
@@ -17,5 +16,4 @@ export const userFormSchema = yup.object().shape({
   email: yup.string().required('Email is required').email('Invalid email'),
   password: yup.string().optional(),
   is_superuser: yup.boolean().required('Is superuser is required'),
-  is_active: yup.boolean().required('Is active is required'),
 });

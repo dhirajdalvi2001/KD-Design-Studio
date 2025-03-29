@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import classNames from 'classnames';
+import { useState } from "react";
+import classNames from "classnames";
 import {
   Navbar,
   NavbarBrand,
@@ -9,26 +9,26 @@ import {
   NavbarMenu,
   NavbarMenuItem,
   Button,
-} from '@nextui-org/react';
-import Logo from '../../assets/logo-without-text.png';
-import { useLocation, useNavigate } from 'react-router-dom';
-import ThemeSwitch from '../Switch/ThemeSwitch';
-import { menuItems } from '../../utils/data';
-import Typography from '../Typography/Typography';
-import { useAxios } from '../../api/useAxios';
-import { authAtom } from '../../utils/globalAtom';
-import { useAtomValue } from 'jotai';
+} from "@nextui-org/react";
+import Logo from "../../assets/logo-without-text.png";
+import { useLocation, useNavigate } from "react-router-dom";
+import ThemeSwitch from "../Switch/ThemeSwitch";
+import { menuItems } from "../../utils/data";
+import Typography from "../Typography/Typography";
+import { useAxios } from "../../api/useAxios";
+import { useSetAtom } from "jotai";
+import { themeAtom } from "../../utils/globalAtom";
 
 export default function TopNavbar() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { handleLogout } = useAxios();
-  const isAuthenticated = useAtomValue(authAtom);
+  const setTheme = useSetAtom(themeAtom);
+  const { handleLogout, isSuperadmin, isAuthenticated } = useAxios();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathName = location.pathname;
 
   function navigateTo(href) {
-    if (href === 'logout') {
+    if (href === "logout") {
       handleLogout();
       return;
     }
@@ -40,80 +40,90 @@ export default function TopNavbar() {
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
       isMenuOpen={isMenuOpen}
-      maxWidth='full'
-      className='bg-foreground-100 fixed top-0 w-full h-16 md:h-24'
+      maxWidth="full"
+      className="bg-foreground-100 fixed top-0 w-full h-16 md:h-24"
     >
-      <NavbarContent className='w-full'>
-        <NavbarContent className='flex justify-between h-16 md:h-24'>
+      <NavbarContent className="w-full">
+        <NavbarContent className="flex justify-between h-16 md:h-24">
           <NavbarBrand>
             <div
-              onClick={() => navigateTo('/')}
-              className='font-bold text-inherit h-14 overflow-hidden cursor-pointer flex items-center'
+              onClick={() => navigateTo("/")}
+              className="font-bold text-inherit h-14 overflow-hidden cursor-pointer flex items-center"
             >
               <img
                 src={Logo}
-                alt='KD-design-studio'
-                className='w-[80px] md:w-[100px]'
+                alt="KD-design-studio"
+                className="w-[80px] md:w-[100px]"
               />
             </div>
           </NavbarBrand>
 
-          <div className='md:hidden flex items-center'>
-            {isAuthenticated && <Button
-              size='sm'
-              onClick={() => navigateTo('/admin')}
-              className='mr-3'
-            >
-              Go to Admin
-            </Button>}
+          <div className="md:hidden flex items-center">
+            {isAuthenticated && isSuperadmin && (
+              <Button
+                size="sm"
+                onClick={() => {
+                  setTheme("dark");
+                  navigateTo("/admin");
+                }}
+                className="mr-3"
+              >
+                Go to Admin
+              </Button>
+            )}
             <ThemeSwitch />
             <NavbarMenuToggle
-              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-              className='!w-10 !h-10 !text-foreground-500'
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              className="!w-10 !h-10 !text-foreground-500"
             />
           </div>
         </NavbarContent>
-        <div className='hidden md:flex items-center'>
-          {isAuthenticated && <Button
-            size='sm'
-            onClick={() => navigateTo('/admin')}
-            className='mr-3'
-          >
-            Go to Admin
-          </Button>}
-          <ThemeSwitch className='hidden md:block' />
+        <div className="hidden md:flex items-center">
+          {isAuthenticated && isSuperadmin && (
+            <Button
+              size="sm"
+              onClick={() => {
+                setTheme("dark");
+                navigateTo("/admin");
+              }}
+              className="mr-3"
+            >
+              Go to Admin
+            </Button>
+          )}
+          <ThemeSwitch className="hidden md:block" />
           <NavbarContent
-            className='hidden md:!flex md:!flex-col gap-0 max-w-fit'
-            justify='center'
+            className="hidden md:!flex md:!flex-col gap-0 max-w-fit"
+            justify="center"
           >
             {menuItems.map((item, index) => {
               const activeItem =
                 item.href === pathName || pathName.startsWith(item.href);
-              if (item.href === '/') return null;
+              if (item.href === "/") return null;
 
-              const loginOption = !isAuthenticated && item.title === 'Login';
-              const logoutOption = isAuthenticated && item.title === 'Logout';
+              const loginOption = !isAuthenticated && item.title === "Login";
+              const logoutOption = isAuthenticated && item.title === "Logout";
 
-              if (!isAuthenticated && item.title === 'Logout') {
+              if (!isAuthenticated && item.title === "Logout") {
                 return null;
               }
-              if (isAuthenticated && item.title === 'Login') {
+              if (isAuthenticated && item.title === "Login") {
                 return null;
               }
               return (
                 <NavbarItem
                   key={`${item}-${index}`}
-                  className='w-full text-right flex justify-end '
+                  className="w-full text-right flex justify-end "
                 >
                   <Typography
-                    variant='subtitle'
+                    variant="subtitle"
                     className={classNames(
-                      'w-fit px-4 flex items-center cursor-pointer transition-all hover:line-through !text-xs',
+                      "w-fit px-4 flex items-center cursor-pointer transition-all hover:line-through !text-xs",
                       activeItem
-                        ? 'text-red-600 line-through'
-                        : 'text-foreground',
-                      loginOption ? 'text-blue-400 font-extrabold' : '',
-                      logoutOption ? 'text-red-600 font-extrabold' : ''
+                        ? "text-red-600 line-through"
+                        : "text-foreground",
+                      loginOption ? "text-blue-400 font-extrabold" : "",
+                      logoutOption ? "text-red-600 font-extrabold" : ""
                     )}
                     onClick={() => navigateTo(item.href)}
                   >
@@ -124,25 +134,25 @@ export default function TopNavbar() {
             })}
           </NavbarContent>
         </div>
-        <NavbarMenu className='lg:hidden'>
+        <NavbarMenu className="lg:hidden">
           {menuItems.map((item, index) => {
-            const homeActive = pathName === '/' && item.title === 'Home';
+            const homeActive = pathName === "/" && item.title === "Home";
             const products =
-              pathName.startsWith('/products/') && item.title === 'Products';
+              pathName.startsWith("/products/") && item.title === "Products";
             const activeItem = item.href === pathName || homeActive || products;
 
-            if (!isAuthenticated && item.title === 'Logout') {
+            if (!isAuthenticated && item.title === "Logout") {
               return null;
             }
-            if (isAuthenticated && item.title === 'Login') {
+            if (isAuthenticated && item.title === "Login") {
               return null;
             }
             return (
               <NavbarMenuItem key={`${item}-${index}`}>
                 <div
                   className={classNames(
-                    'w-full pl-2 text-sm sm:text-base',
-                    activeItem ? 'text-red-600 line-through' : 'text-foreground'
+                    "w-full pl-2 text-sm sm:text-base",
+                    activeItem ? "text-red-600 line-through" : "text-foreground"
                   )}
                   onClick={() => navigateTo(item.href)}
                 >

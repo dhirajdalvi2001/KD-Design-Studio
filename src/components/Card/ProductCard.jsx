@@ -1,7 +1,7 @@
 import Typography from "../Typography/Typography";
 import { useNavigate } from "react-router-dom";
 
-export default function ProductCard({ id, name, short, slug, imgUrl }) {
+export default function ProductCard({ id, name, slug, imgUrl }) {
   const navigate = useNavigate();
   function handleNavigation() {
     navigate(`/products/${slug}`);
@@ -24,7 +24,6 @@ export default function ProductCard({ id, name, short, slug, imgUrl }) {
       >
         {name}
       </Typography>
-      {/* <Typography variant="caption">{short}</Typography> */}
     </div>
   );
 }

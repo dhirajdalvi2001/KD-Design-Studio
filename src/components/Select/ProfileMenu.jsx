@@ -9,14 +9,13 @@ import { useAxios } from '../../api/useAxios';
 
 export default function ProfileMenu() {
   const { handleLogout } = useAxios();
-  const userData = localStorage.getItem('user');
-  const user = userData ? JSON.parse(userData) : null;
+  const { username } = useAxios()
 
   return (
     <Dropdown>
       <DropdownTrigger>
         <Button variant='bordered' className='max-w-[200px] truncate'>
-          {user?.username}
+          {username}
         </Button>
       </DropdownTrigger>
       <DropdownMenu aria-label='Static Actions'>

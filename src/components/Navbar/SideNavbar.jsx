@@ -21,19 +21,11 @@ export default function SideNavbar() {
           </Link>
 
           <Link
-            to='/admin/products'
+            to='/admin/manage-products'
             className='flex items-center gap-3 px-6 py-3 hover:bg-foreground-200 text-foreground-900 transition-all'
           >
             <BsBox className='text-lg' />
-            <span>Products</span>
-          </Link>
-
-          <Link
-            to='/admin/manage-tags'
-            className='flex items-center gap-3 px-6 py-3 hover:bg-foreground-200 text-foreground-900 transition-all'
-          >
-            <BsTags className='text-lg' />
-            <span>Manage Tags</span>
+            <span>Manage Products</span>
           </Link>
 
           <Accordion

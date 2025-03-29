@@ -1,18 +1,19 @@
 import AdminNavbar from '../Navbar/AdminNavbar';
 import { useAtom, useAtomValue } from 'jotai';
-import { authAtom, themeAtom } from '../../utils/globalAtom';
+import {  themeAtom } from '../../utils/globalAtom';
 import classNames from 'classnames';
 import { Outlet, useNavigate } from 'react-router-dom';
 import SideNavbar from '../Navbar/SideNavbar';
 import { useEffect } from 'react';
+import { useAxios } from '../../api/useAxios';
 
 export default function AdminLayout() {
   const navigate = useNavigate();
+  const {isAuthenticated, isSuperadmin} = useAxios()
   const [theme] = useAtom(themeAtom);
-  const isAuthenticated = useAtomValue(authAtom);
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated || !isSuperadmin) {
       navigate('/auth/login');
     }
 

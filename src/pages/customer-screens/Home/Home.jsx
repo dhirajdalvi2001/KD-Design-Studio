@@ -1,13 +1,27 @@
-import BodyLayout from '../../../components/Layout/BodyLayout';
-import Carousel from 'react-bootstrap/Carousel';
-import { carousalProducts } from '../../../utils/data';
-import { useNavigate } from 'react-router-dom';
-import Typography from '../../../components/Typography/Typography';
-import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import BodyLayout from "../../../components/Layout/BodyLayout";
+import Carousel from "react-bootstrap/Carousel";
+import { carousalProducts } from "../../../utils/data";
+import { useNavigate } from "react-router-dom";
+import Typography from "../../../components/Typography/Typography";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { useQuery } from "@tanstack/react-query";
+import { useAxios } from "../../../api/useAxios";
 
 const Home = () => {
   const navigate = useNavigate();
+  const { axiosInstance } = useAxios();
+
+  // All Products
+  const { data: productsData, isLoading } = useQuery({
+    queryKey: ["getAllProductsCarousel"],
+    queryFn: async () => {
+      const response = await axiosInstance.get("/products/carousel/");
+      return response?.data?.data;
+    },
+    refetchOnMount: true,
+    gcTime: 5 * 60 * 1000, // 5 minutes
+  });
 
   const CustomPrevArrow = ({ onClick }) => (
     <BsChevronLeft
@@ -35,42 +49,45 @@ const Home = () => {
         fade
         touch
       >
-        {carousalProducts?.map((product) => {
-          return (
-            <Carousel.Item
-              key={product?.id}
-              className="h-[90vh] !flex !justify-center !items-center"
-            >
-              <div
-                className="w-screen h-[100vw] md:h-[40vw] md:w-[40vw] flex justify-center items-center overflow-hidden cursor-pointer"
-                onClick={() => navigate(`/products/${product.slug}`)}
+        {/* Shuffle and show the Products data */}
+        {productsData
+          ?.sort(() => Math.random() - 0.5)
+          ?.map((product) => {
+            return (
+              <Carousel.Item
+                key={product?.id}
+                className="h-[90vh] !flex !justify-center !items-center"
               >
-                <LazyLoadImage
-                  src={product?.src}
-                  alt={product?.name}
-                  className="h-full"
-                />
-              </div>
-              <Carousel.Caption className="text-foreground-800 p-0 sm:hidden -z-10">
-                <div className="flex justify-between">
-                  <Typography
-                    variant="caption"
-                    className="text-[9px] sm:text-[11px] flex items-center w-fit"
-                  >
-                    {product?.name}
-                  </Typography>
-                  <Typography
-                    variant="a"
-                    className="text-[9px] sm:text-[11px] font-normal"
-                    href="/products"
-                  >
-                    View all
-                  </Typography>
+                <div
+                  className="w-screen h-[100vw] md:h-[40vw] md:w-[40vw] flex justify-center items-center overflow-hidden cursor-pointer"
+                  onClick={() => navigate(`/products/${product.slug}`)}
+                >
+                  <LazyLoadImage
+                    src={product?.src}
+                    alt={product?.name}
+                    className="h-full"
+                  />
                 </div>
-              </Carousel.Caption>
-            </Carousel.Item>
-          );
-        })}
+                <Carousel.Caption className="text-foreground-800 p-0 sm:hidden -z-10">
+                  <div className="flex justify-between">
+                    <Typography
+                      variant="caption"
+                      className="text-[9px] sm:text-[11px] flex items-center w-fit"
+                    >
+                      {product?.name}
+                    </Typography>
+                    <Typography
+                      variant="a"
+                      className="text-[9px] sm:text-[11px] font-normal"
+                      href="/products"
+                    >
+                      View all
+                    </Typography>
+                  </div>
+                </Carousel.Caption>
+              </Carousel.Item>
+            );
+          })}
       </Carousel>
     </BodyLayout>
   );

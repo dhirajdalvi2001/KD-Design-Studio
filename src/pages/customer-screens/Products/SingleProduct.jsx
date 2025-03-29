@@ -1,20 +1,53 @@
-import { useParams } from 'react-router-dom';
-import BodyLayout from '../../../components/Layout/BodyLayout';
-import { products } from '../../../utils/data';
-import Breadcrumbs from '../../../components/Breadcrumbs/Breadcrumbs';
-import Typography from '../../../components/Typography/Typography';
+import { Link, useParams } from "react-router-dom";
+import BodyLayout from "../../../components/Layout/BodyLayout";
+import { products } from "../../../utils/data";
+import Breadcrumbs from "../../../components/Breadcrumbs/Breadcrumbs";
+import Typography from "../../../components/Typography/Typography";
+import { useAxios } from "../../../api/useAxios";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { videoExtensions } from "../../../utils/constants";
+import { toTitleCase } from "../../../utils/helper-functions";
+import { FaThumbsUp } from "react-icons/fa";
+import { Button, Tooltip } from "@nextui-org/react";
+import classNames from "classnames";
 
 export default function SingleProduct() {
   const { slug } = useParams();
-  const product = products.find((pro) => pro.slug === slug);
+  const { axiosInstance, isAuthenticated } = useAxios();
+  const queryClient = useQueryClient();
+
+  // const product = products.find((pro) => pro.slug === slug);
+
+  // Product Details
+  const { data: product, isLoading } = useQuery({
+    queryKey: ["getSinglePoduct"],
+    queryFn: async () => {
+      const response = await axiosInstance.get(`/products/${slug}/details/`);
+      return response?.data?.data;
+    },
+    refetchOnMount: true,
+    gcTime: 5 * 60 * 1000, // 5 minutes
+  });
+
+  const { mutate: likeDislikeProduct } = useMutation({
+    mutationKey: "likeDislikeProduct",
+    mutationFn: async (payload) => {
+      const response = await axiosInstance.patch(`/products/like/`, payload);
+      return response?.data?.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("getSinglePoduct");
+    },
+  });
+
   const breadcrumbOptions = [
     {
-      label: 'Products',
-      value: '/products',
+      label: "Products",
+      value: "/products",
       allowClick: true,
     },
     {
-      label: product.name,
+      label: product?.name,
       value: `/products/${slug}`,
       allowClick: false,
     },
@@ -31,12 +64,49 @@ export default function SingleProduct() {
               </div>
               {/* Product Details */}
               <div className="flex flex-col gap-2 text-justify">
-                <>
-                  <Typography variant="title">{product.name}</Typography>
-                </>
+                <div className="flex justify-between items-center gap-4 relative">
+                  <Typography variant="title">{product?.name}</Typography>
+                  {!isAuthenticated && (
+                    <Typography
+                      variant="caption"
+                      className="absolute -top-6 right-0 bg-foreground-300 px-2 py-0.5 text-[11px]"
+                    >
+                      To drop a like, Please login{" "}
+                      <Link to="/auth/login" className="text-blue-700">
+                        here
+                      </Link>
+                    </Typography>
+                  )}
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-1">
+                      <Typography variant="p" className="text-xs">
+                        Total Likes:{" "}
+                      </Typography>
+                      <Typography variant="p" className="min-w-5">
+                        {product?.likes}
+                      </Typography>
+                    </div>
+                    <Button
+                      className="!p-0 !min-w-8 !w-8 !h-8"
+                      onClick={() => {
+                        if (!isAuthenticated) return;
+                        likeDislikeProduct({ id: product?.id });
+                      }}
+                      disabled={!isAuthenticated}
+                    >
+                      <FaThumbsUp
+                        className={classNames(
+                          product?.is_liked
+                            ? "text-blue-600"
+                            : "text-foreground-900"
+                        )}
+                      />
+                    </Button>
+                  </div>
+                </div>
                 <>
                   <Typography variant="caption">
-                    Year: <span className="font-medium">{product.year}</span>
+                    Year: <span className="font-medium">{product?.year}</span>
                   </Typography>
                   <Typography variant="caption" className="italic">
                     Prototype
@@ -44,76 +114,50 @@ export default function SingleProduct() {
                 </>
               </div>
             </div>
-            <div className="flex flex-col gap-2 text-justify">
-              {product?.details?.map((detail) => {
-                if (detail?.listItems) {
-                  return (
-                    <div key={detail.id}>
-                      {detail?.title && (
-                        <Typography variant="p">
-                          <span className="font-medium">{detail?.title}</span>
-                        </Typography>
-                      )}
-                      <ol className="pl-4 list-decimal">
-                        {detail?.listItems?.map((list, index) => {
-                          return (
-                            <li
-                              key={'list' + index}
-                              className="text-foreground-500"
-                            >
-                              <Typography variant="caption">
-                                {list?.caption?.map((caption, index) => {
-                                  return <p key={index}>{caption}</p>;
-                                })}
-                              </Typography>
-                            </li>
-                          );
-                        })}
-                      </ol>
-                    </div>
-                  );
-                } else {
-                  return (
-                    <div key={detail.id}>
-                      <Typography variant="p">
-                        <span className="font-medium">{detail?.title}</span>
-                      </Typography>
-                      <Typography variant="caption">
-                        {detail?.caption?.map((caption, index) => {
-                          return <p key={'caption' + index}>{caption}</p>;
-                        })}
-                      </Typography>
-                    </div>
-                  );
-                }
-              })}
+            <div className="flex flex-col gap-4 text-justify">
+              {["introduction", "concept_overview"]?.map((key) => (
+                <div key={key} className="flex flex-col gap-1">
+                  <Typography variant="p">
+                    <span className="font-medium">
+                      {key ? toTitleCase(key) : ""}
+                    </span>
+                  </Typography>
+                  <Typography variant="caption">{product?.[key]}</Typography>
+                </div>
+              ))}
             </div>
           </div>
         </div>
         <div className="pb-14 md:py-14 flex flex-col items-center gap-14">
-          {product?.videoUrls?.map((video, index) => {
-            return (
-              <video
-                key={video}
-                src={video}
-                alt={slug + '_video_' + index}
-                className="w-[90%]"
-                autoPlay="autoplay"
-                loop
-                muted
-              />
-            );
-          })}
-          {product.imgUrls.map((image, index) => {
-            return (
-              <img
-                key={image}
-                src={image}
-                alt={slug + '_image_' + index}
-                className="w-[90%]"
-              />
-            );
-          })}
+          {product?.assets
+            ? Object.entries(product?.assets)?.map(([key, value], index) => {
+                const isVideoFile = value?.endsWith(videoExtensions);
+
+                return (
+                  <>
+                    {isVideoFile && (
+                      <video
+                        key={value + "video"}
+                        src={value}
+                        alt={slug + "_video_" + index}
+                        className="w-[90%]"
+                        autoPlay="autoplay"
+                        loop
+                        muted
+                      />
+                    )}
+                    {!isVideoFile && (
+                      <img
+                        key={value + "image"}
+                        src={value}
+                        alt={slug + "_image_" + index}
+                        className="w-[90%]"
+                      />
+                    )}
+                  </>
+                );
+              })
+            : null}
         </div>
       </div>
     </BodyLayout>

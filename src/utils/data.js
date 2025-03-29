@@ -14,8 +14,8 @@ export const menuItems = [
   { title: 'Products', href: '/products' },
   { title: 'About', href: '/about' },
   { title: 'Contact', href: '/contact' },
-  // { title: 'Login', href: '/auth/login' },
-  // { title: 'Logout', href: 'logout' },
+  { title: 'Login', href: '/auth/login' },
+  { title: 'Logout', href: 'logout' },
 ];
 
 export const carousalProducts = [

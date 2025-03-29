@@ -24,3 +24,7 @@ li::marker {
 html {
   background-color: transparent !important;
 }
+
+[data-slot="error-message"] {
+  position: absolute;
+}

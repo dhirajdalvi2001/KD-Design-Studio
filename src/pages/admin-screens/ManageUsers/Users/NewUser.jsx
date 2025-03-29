@@ -33,7 +33,7 @@ export default function NewUser() {
   const { data: userDetails, isLoading: userDetailsLoading } = useQuery({
     queryKey: ['userDetails'],
     queryFn: async () => {
-      const response = await axiosInstance.get(`/iam/user/${userId}`);
+      const response = await axiosInstance.get(`/iam/user/${userId}/`);
       return response.data;
     },
     enabled: !!userId,
@@ -58,7 +58,7 @@ export default function NewUser() {
   // Update User
   const { mutate: updateUser, isLoading: updateUserLoading } = useMutation({
     mutationFn: async (data) => {
-      const response = await axiosInstance.patch(`/iam/user/${userId}`, data);
+      const response = await axiosInstance.put(`/iam/user/${userId}/`, data);
       return response.data;
     },
     onSuccess: () => {
@@ -72,11 +72,13 @@ export default function NewUser() {
 
   useEffect(() => {
     if (userDetails) {
-      setValue('username', userDetails.data.username);
-      setValue('first_name', userDetails.data.first_name);
-      setValue('last_name', userDetails.data.last_name);
-      setValue('email', userDetails.data.email);
-      setValue('is_superuser', userDetails.data.is_superuser);
+      reset({
+        "username": userDetails.data.username,
+        "first_name": userDetails.data.first_name,
+        "last_name": userDetails.data.last_name,
+        "email": userDetails.data.email,
+        "is_superuser": userDetails.data.is_superuser
+      })
     }
 
     if (!userId) {
@@ -194,7 +196,7 @@ export default function NewUser() {
             isDisabled={buttonDisabled}
             className='bg-primary-500 text-white'
           >
-            Save
+            {userId? "Edit" : "Save"}
           </Button>
         </div>
       </form>

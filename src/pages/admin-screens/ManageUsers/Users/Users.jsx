@@ -2,7 +2,6 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Table from '../../../../components/Table/Table';
 import { useAxios } from '../../../../api/useAxios';
 import AdminBodyLayout from '../../../../components/Layout/AdminBodyLayout';
-import { toast } from 'react-toastify';
 import UserActions from './UserActions';
 import Badge from '../../../../components/Badge/Badge';
 
@@ -53,8 +52,6 @@ export default function Users() {
       queryClient.invalidateQueries({ queryKey: ['getAllUsers'] });
     },
   });
-
-  console.log(usersData, 'users DD');
 
   const usersTableBody = usersData?.data?.map((user, index) => [
     index + 1,

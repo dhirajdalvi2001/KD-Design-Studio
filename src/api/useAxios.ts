@@ -1,25 +1,28 @@
-import { axiosInstance, customFetch } from './axios';
-import { useEffect } from 'react';
-import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+import { axiosInstance, customFetch } from "./axios";
+import { useEffect } from "react";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 export const useAxios = () => {
   const navigate = useNavigate();
-  const [cookies, setCookies, removeCookies] = useCookies();
-  const accessToken = cookies['accessToken'];
-  const refreshToken = cookies['refreshToken'];
-  const stringUser = cookies['user'];
-  const user = stringUser ? JSON.parse(stringUser) : null;
-  const userId = user?.id;
+  const [cookies, setCookies] = useCookies();
+  const access = cookies["access"];
+  const refresh = cookies["refresh"];
+  const firstName = cookies["first_name"];
+  const lastName = cookies["last_name"];
+  const isSuperadmin = cookies["is_superadmin"];
+  const email = cookies["email"];
+  const username = cookies["username"];
+  const userId = cookies["id"];
+  const isAuthenticated = !!access;
 
   // Add interceptor to handle token refresh
   useEffect(() => {
     const requestIntercept = axiosInstance.interceptors.request.use(
       (config) => {
         // Get the latest access token on each request
-        const token = cookies['accessToken'];
-        if (token) {
-          config.headers.Authorization = `Bearer ${token}`;
+        if (access) {
+          config.headers.Authorization = `Bearer ${access}`;
         }
         return config;
       },
@@ -32,7 +35,7 @@ export const useAxios = () => {
         const originalRequest = error.config;
 
         // Skip refresh token attempt for login endpoint errors
-        if (originalRequest.url === '/iam/login/') {
+        if (originalRequest.url === "/iam/login/") {
           return Promise.reject(error);
         }
 
@@ -40,38 +43,33 @@ export const useAxios = () => {
           originalRequest._retry = true;
 
           try {
-            const refreshToken = cookies['refreshToken'];
-            const response = await customFetch.post('/iam/login/refresh/', {
-              refresh_token: refreshToken,
+            const response = await customFetch.post("/iam/refresh/", {
+              refresh_token: refresh,
             });
 
-            const newAccessToken = response?.data?.data?.access_token;
-            const userInfo = response?.data?.data?.user_data;
-            cookies.set('accessToken', newAccessToken);
-            cookies.set('user', JSON.stringify(userInfo));
+            const newAccessToken = response?.data?.access;
+            setCookies("access", newAccessToken);
 
             // Update the Authorization header with new access token
             originalRequest.headers[
-              'Authorization'
+              "Authorization"
             ] = `Bearer ${newAccessToken}`;
             // Update axiosInstance default headers
             axiosInstance.defaults.headers.common[
-              'Authorization'
+              "Authorization"
             ] = `Bearer ${newAccessToken}`;
 
             // Ensure the Authorization header is added to the request
             originalRequest.headers[
-              'Authorization'
+              "Authorization"
             ] = `Bearer ${newAccessToken}`;
 
             return axiosInstance(originalRequest);
           } catch (refreshError) {
             // Handle refresh token failure
-            localStorage.setItem('redirectPath', window.location.pathname);
-            cookies.remove('accessToken');
-            cookies.remove('refreshToken');
-            cookies.remove('user');
-            window.location.href = '/auth/login';
+            localStorage.setItem("redirectPath", window.location.pathname);
+            handleLogout();
+            window.location.href = "/auth/login";
             return Promise.reject(refreshError);
           }
         }
@@ -85,21 +83,31 @@ export const useAxios = () => {
       axiosInstance.interceptors.request.eject(requestIntercept);
       axiosInstance.interceptors.response.eject(responseIntercept);
     };
-  }, []);
+  }, [access]);
 
   function handleLogout() {
-    localStorage.removeItem('user');
-    setCookies('accessToken', null);
-    setCookies('refreshToken', null);
-    navigate('/');
+    setCookies("access", null);
+    setCookies("refresh", null);
+    setCookies("first_name", null);
+    setCookies("last_name", null);
+    setCookies("is_superadmin", null);
+    setCookies("email", null);
+    setCookies("username", null);
+    setCookies("id", null);
+    navigate("/");
   }
 
   return {
     axiosInstance,
     handleLogout,
-    accessToken,
-    refreshToken,
-    user,
+    access,
+    refresh,
     userId,
+    firstName,
+    lastName,
+    username,
+    email,
+    isSuperadmin,
+    isAuthenticated,
   };
 };

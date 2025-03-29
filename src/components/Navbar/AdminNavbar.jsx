@@ -1,24 +1,27 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarMenuToggle,
   Button,
-} from '@nextui-org/react';
-import Logo from '../../assets/logo-without-text.png';
-import { useNavigate } from 'react-router-dom';
-import ThemeSwitch from '../Switch/ThemeSwitch';
-import { useAxios } from '../../api/useAxios';
-import ProfileMenu from '../Select/ProfileMenu';
+} from "@nextui-org/react";
+import Logo from "../../assets/logo-without-text.png";
+import { useNavigate } from "react-router-dom";
+import ThemeSwitch from "../Switch/ThemeSwitch";
+import { useAxios } from "../../api/useAxios";
+import ProfileMenu from "../Select/ProfileMenu";
+import { themeAtom } from "../../utils/globalAtom";
+import { useSetAtom } from "jotai";
 
 export default function AdminNavbar() {
   const navigate = useNavigate();
   const { handleLogout } = useAxios();
+  const setTheme = useSetAtom(themeAtom);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   function navigateTo(href) {
-    if (href === 'logout') {
+    if (href === "logout") {
       handleLogout();
       return;
     }
@@ -37,7 +40,7 @@ export default function AdminNavbar() {
         <NavbarContent className="flex justify-between h-16">
           <NavbarBrand>
             <div
-              onClick={() => navigateTo('/')}
+              onClick={() => navigateTo("/")}
               className="font-bold text-inherit h-14 overflow-hidden cursor-pointer flex items-center"
             >
               <img
@@ -49,25 +52,35 @@ export default function AdminNavbar() {
           </NavbarBrand>
 
           <div className="md:hidden flex items-center">
-            <Button size="sm" onClick={() => navigateTo('/')} className="mr-3">
+            <Button
+              size="sm"
+              onClick={() => {
+                setTheme("light");
+                navigateTo("/");
+              }}
+              className="mr-3"
+            >
               Go to Customer
             </Button>
             <ThemeSwitch />
             <NavbarMenuToggle
-              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               className="!w-10 !h-10 !text-foreground-500"
             />
           </div>
         </NavbarContent>
-        <div className="hidden md:flex items-center">
+        <div className="flex items-center">
           <Button
             size="sm"
-            onClick={() => navigateTo('/')}
+            onClick={() => {
+              setTheme("light");
+              navigateTo("/");
+            }}
             className="mr-3 min-w-fit"
           >
             Go to Customer
           </Button>
-          <ThemeSwitch className="hidden md:block" />
+          <ThemeSwitch />
           <ProfileMenu />
         </div>
       </NavbarContent>
