@@ -37,39 +37,7 @@ export default function AdminNavbar() {
       className="bg-foreground-100 fixed top-0 w-full h-16"
     >
       <NavbarContent className="w-full">
-        <NavbarContent className="flex justify-between h-16">
-          <NavbarBrand>
-            <div
-              onClick={() => navigateTo("/")}
-              className="font-bold text-inherit h-14 overflow-hidden cursor-pointer flex items-center"
-            >
-              <img
-                src={Logo}
-                alt="KD-design-studio"
-                className="w-[60px] md:w-[80px]"
-              />
-            </div>
-          </NavbarBrand>
-
-          <div className="md:hidden flex items-center">
-            <Button
-              size="sm"
-              onClick={() => {
-                setTheme("light");
-                navigateTo("/");
-              }}
-              className="mr-3"
-            >
-              Go to Customer
-            </Button>
-            <ThemeSwitch />
-            <NavbarMenuToggle
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-              className="!w-10 !h-10 !text-foreground-500"
-            />
-          </div>
-        </NavbarContent>
-        <div className="flex items-center">
+        <div className="ml-auto flex items-center">
           <Button
             size="sm"
             onClick={() => {
