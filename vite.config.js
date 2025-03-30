@@ -9,4 +9,7 @@ export default defineConfig({
       "Content-Type": "application/javascript",
     },
   },
+  build: {
+    target: "esnext", // Ensure compatibility
+  },
 });
