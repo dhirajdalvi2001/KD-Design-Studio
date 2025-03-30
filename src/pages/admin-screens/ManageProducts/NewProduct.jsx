@@ -203,6 +203,9 @@ export default function NewProduct() {
   const fieldsDisabled = productDetailsLoading;
   const buttonDisabled = createProductLoading || updateProductLoading;
 
+  console.log(watch('type'), 'type DD');
+  
+
   return (
     <AdminBodyLayout isFormPage buttonDisabled={buttonDisabled}>
       <div className="w-full flex items-start gap-5">
@@ -254,6 +257,7 @@ export default function NewProduct() {
             variant="bordered"
             isDisabled={fieldsDisabled}
             value={watch("type")}
+            items={productTypes}
             errorMessage={errors.type?.message}
             {...register("type")}
           >
