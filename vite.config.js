@@ -11,5 +11,6 @@ export default defineConfig({
   },
   build: {
     target: "esnext", // Ensure compatibility
+    assetsInlineLimit: 0, // Vite uses preloading which sometimes fails on Safari. Try disabling it:    
   },
 });
