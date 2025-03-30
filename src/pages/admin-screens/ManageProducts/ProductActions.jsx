@@ -1,6 +1,7 @@
-import { Button, Switch } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import { BsPencilSquare, BsTrash } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import DeleteAction from "../../../components/Table/DeleteAction";
 
 export default function ProductActions({
   product,
@@ -22,15 +23,11 @@ export default function ProductActions({
       >
         <BsPencilSquare />
       </Button>
-      <Button
-        variant="ghost"
-        size="sm"
-        isDisabled={deleteProductLoading}
-        className="!min-w-8 !w-8 !h-8 text-danger !p-0"
-        onClick={() => deleteProduct(product.id)}
-      >
-        <BsTrash />
-      </Button>
+      <DeleteAction
+        isLoading={deleteProductLoading}
+        onDelete={() => deleteProduct(product.id)}
+        type="Product"
+      />
     </div>
   );
 }

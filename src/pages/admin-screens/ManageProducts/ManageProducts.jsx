@@ -12,7 +12,7 @@ export default function ManageProducts() {
     { label: "Sr. No.", className: "min-w-[100px]" },
     { label: "Product Name", className: "w-full" },
     { label: "Year", className: "min-w-[100px]" },
-    { label: "Slug", className: "min-w-[100px]" },
+    { label: "Slug", className: "min-w-[250px]" },
     { label: "Type", className: "min-w-[150px]" },
     { label: "Likes", className: "min-w-[100px]" },
     { label: "Actions", className: "min-w-[60px]" },
@@ -53,7 +53,7 @@ export default function ManageProducts() {
       {product.slug}
     </Link>,
     product.type,
-    product.likes?.length || 0 + " Likes",
+    product.likes?.length || 0,
     <ProductActions
       key={product.id}
       product={product}

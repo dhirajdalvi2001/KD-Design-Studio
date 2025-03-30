@@ -1,7 +1,8 @@
-import { Button, Switch } from '@nextui-org/react';
-import { useState } from 'react';
-import { BsPencilSquare, BsTrash } from 'react-icons/bs';
-import { useNavigate } from 'react-router-dom';
+import { Button, Switch } from "@nextui-org/react";
+import { useState } from "react";
+import { BsPencilSquare, BsTrash } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import DeleteAction from "../../../../components/Table/DeleteAction";
 
 export default function UserActions({
   user,
@@ -34,15 +35,11 @@ export default function UserActions({
         isSelected={isActive}
         onValueChange={handleStatusChange}
       />
-      <Button
-        variant="ghost"
-        size="sm"
-        isDisabled={deleteUserLoading}
-        className="!min-w-8 !w-8 !h-8 text-danger !p-0"
-        onClick={() => deleteUser(user.id)}
-      >
-        <BsTrash />
-      </Button>
+      <DeleteAction
+        isLoading={deleteUserLoading}
+        onDelete={() => deleteUser(user.id)}
+        type='User'
+      />
     </div>
   );
 }
