@@ -10,7 +10,7 @@ import {
   NavbarMenuItem,
   Button,
 } from "@nextui-org/react";
-import Logo from "../../assets/logo-without-text.png";
+import Logo from "../../assets/logo2.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import ThemeSwitch from "../Switch/ThemeSwitch";
 import { menuItems } from "../../utils/data";

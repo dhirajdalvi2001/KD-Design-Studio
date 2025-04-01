@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import logo from "../../assets/logo-without-text.png";
+import logo from "../../assets/logo2.png";
 import Typography from "../Typography/Typography";
 import { FaFacebook } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
@@ -11,10 +11,10 @@ export default function Footer() {
     <div className="h-full md:h-full w-full px-4 md:px-20 bg-foreground-100 border-t-1 flex justify-between items-center">
       <div className="flex justify-start gap-4 w-32 md:w-36 text-foreground-500">
         <a href={socials.facebook} target="_blank">
-          <FaFacebook size={22} className="cursor-pointer" />
+          <FaFacebook size={22} className="cursor-pointer text-primary-color" />
         </a>
         <a href={socials.instagram} target="_blank">
-          <RiInstagramFill size={22} className="cursor-pointer" />
+          <RiInstagramFill size={22} className="cursor-pointer text-primary-color" />
         </a>
       </div>
       <div

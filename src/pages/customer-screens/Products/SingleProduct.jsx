@@ -72,7 +72,7 @@ export default function SingleProduct() {
                       className="absolute -top-6 right-0 bg-foreground-300 px-2 py-0.5 text-[11px]"
                     >
                       To drop a like, Please login{" "}
-                      <Link to="/auth/login" className="text-blue-700">
+                      <Link to="/auth/login" className="text-primary-color font-medium">
                         here
                       </Link>
                     </Typography>
@@ -95,7 +95,7 @@ export default function SingleProduct() {
                       <FaThumbsUp
                         className={classNames(
                           product?.is_liked
-                            ? "text-blue-600"
+                            ? "text-primary-color"
                             : "text-foreground-900"
                         )}
                       />
