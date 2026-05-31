@@ -108,7 +108,7 @@ export default function NewProduct() {
         const newIndex = currentLength + 1;
 
         const fileUrl =
-          import.meta.env.VITE_APP_BUCKET_URL + response.data.fields.key;
+          s3Response.data?.url || (import.meta.env.VITE_APP_BUCKET_URL + response.data.fields.key);
         const formattedUrl = fileUrl?.replace(/ /g, "+");
 
         setAssets({
